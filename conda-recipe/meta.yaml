@@ -23,16 +23,14 @@ requirements:
       - cmake
       - ninja
       - python
-      - python-gil     # [py>=314]
       - pip
       - mkl-devel
       - intel-openmp
-      - cython
+      - cython >=3.1.0
       - numpy
       - wheel  >=0.41.3
     run:
       - python
-      - python-gil     # [py>=314]
       - {{ pin_compatible('mkl') }}
       - {{ pin_compatible('intel-openmp') }}
       - numpy >=1.26.4
