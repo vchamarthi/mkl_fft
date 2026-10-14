@@ -7,11 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [dev] - YYYY-MM-DD
 
 ### Added
+* Added support for free-threaded (GIL-disabled) CPython builds: the Cython extension is compiled with `freethreading_compatible=True` [gh-357](https://github.com/IntelPython/mkl_fft/pull/357)
 
 ### Changed
+* Raised the minimum build-time `Cython` requirement to `3.1.0`, the first release providing the `freethreading_compatible` directive [gh-357](https://github.com/IntelPython/mkl_fft/pull/357)
+* Removed the `python-gil` constraint from the conda recipes, which pinned `mkl_fft` to GIL-enabled Python 3.14 builds [gh-357](https://github.com/IntelPython/mkl_fft/pull/357)
 * Multi-iterator constructors now return a status corresponding to allocation success or failure, and raise `MemoryError` instead of `ValueError` [gh-373](https://github.com/IntelPython/mkl_fft/pull/373)
 * `_direct_fftnd` now also checks the status returned by the backend instead of discarding it [gh-373](https://github.com/IntelPython/mkl_fft/pull/373)
 * Pinned Cython in the Coverity Scan workflow so generated code stays stable between scans, and added `coverity/README.md` documenting the known false-positive families and the scan review checklist [gh-374](https://github.com/IntelPython/mkl_fft/pull/374)
+* Reduced Python overhead in `norm="forward"`/`"ortho"` scaling by computing the scale factor without `numpy.prod` [gh-384](https://github.com/IntelPython/mkl_fft/pull/384)
+* `rfft` now casts input of dtypes other than `float32`/`float64` to `float64` keeping its memory order instead of making it C-contiguous, avoiding a slow reordering copy for Fortran-ordered input [gh-389](https://github.com/IntelPython/mkl_fft/pull/389)
 
 ### Fixed
 * Fixed `norm="forward"`/`"ortho"` scaling in `fftn`, `ifftn`, `rfftn`, `irfftn` and the `fft2` family when only a subset of axes is transformed: the scale used the full array shape instead of the transformed axes [gh-336](https://github.com/IntelPython/mkl_fft/issues/336), [gh-370](https://github.com/IntelPython/mkl_fft/pull/370)
@@ -21,6 +26,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Fixed possible memory leaks when `PyMem_Malloc` fails, and raise `MemoryError` [gh-373](https://github.com/IntelPython/mkl_fft/pull/373)
 * Fixed possible memory leaks when multi-iterator constructors fail [gh-373](https://github.com/IntelPython/mkl_fft/pull/373)
 * Fixed N-D transforms returning a success status when a scratch allocation fails [gh-373](https://github.com/IntelPython/mkl_fft/pull/373)
+* Fixed `fft`, `ifft`, and the `fftn`/`fft2` family returning `out` unmodified when `out` is given and the input dtype is not `float32`, `float64`, `complex64` or `complex128` (e.g. integer, `bool`, `float16`) [gh-387](https://github.com/IntelPython/mkl_fft/pull/387)
+* Fixed wrong results and writes outside of `out` in `fft`/`ifft` when the input is cast or zero-padded into a contiguous copy while `out` has the same non-contiguous layout as the original input [gh-387](https://github.com/IntelPython/mkl_fft/pull/387)
+* Fixed wrong results and writes outside of `out` in `ifft` and `ifftn` of real input when `out` is not contiguous: the final complex conjugation treated `out` as one contiguous block [gh-389](https://github.com/IntelPython/mkl_fft/pull/389)
+* Fixed wrong results in `rfft` and `rfftn` with `out` for input that is cast to `float64` (e.g. integer, `float16`) when the input and `out` are Fortran-ordered [gh-389](https://github.com/IntelPython/mkl_fft/pull/389)
 
 ## [2.3.2] - 2026-08-04
 

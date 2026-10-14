@@ -153,7 +153,7 @@ If you already have `mkl` and `numpy` installed (from your system or a conda env
 and want to reuse them instead of pulling fresh copies into an isolated build, first
 install the build dependencies:
 ```sh
-pip install meson-python cmake ninja cython numpy mkl-devel
+pip install meson-python cmake ninja "cython>=3.1.0" numpy mkl-devel
 ```
 
 then build against the existing installation with:
@@ -165,3 +165,10 @@ Optionally, install `scipy` to use the `mkl_fft.interfaces.scipy_fft` module:
 ```sh
 pip install scipy
 ```
+
+---
+# Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for the development workflow: setting up a
+build environment, running the tests and lint hooks, code style, and what to
+include in a pull request.
