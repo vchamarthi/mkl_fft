@@ -4,7 +4,7 @@ name: repoevals
 
 on:
   push:
-    branches: [repoevals]
+    branches: [repoevals-home]
     paths: [".agent-evals/**", "repoevals.toml", ".github/workflows/repoevals.yml"]
   pull_request:
     paths: [".agent-evals/**", "repoevals.toml", ".github/workflows/repoevals.yml"]
