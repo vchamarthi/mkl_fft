@@ -1,0 +1,25 @@
+version = "1.0"
+
+[metadata]
+family = "fix"
+status = "draft"
+base = "6335c5948a4a9a271e1897e14dfc1d8bf05d8efe"
+created = "2024-07-19"
+source = "https://github.com/IntelPython/mkl_fft/pull/111"
+difficulty = "easy"
+tags = ["fftn", "scale", "dtype"]
+
+[agent]
+timeout_sec = 3600
+
+[verifier]
+timeout_sec = 1800
+
+[grader]
+type = "hidden_tests"
+# Narrow targets to the tests that fail before the fix and pass after it (node ids for pytest).
+targets = ["mkl_fft/tests/test_repoevals_fix_fftn_scale_fallback_fftnd.py"]
+# Existing tests of the same component that must keep passing.
+regression_targets = ["mkl_fft/tests/test_fftnd.py::Test_Scales", "mkl_fft/tests/test_fftnd.py::Test_Regressions::test_gh64"]
+root_cause_files = ["mkl_fft/_pydfti.pyx"]
+gate = ["strict_pass"]

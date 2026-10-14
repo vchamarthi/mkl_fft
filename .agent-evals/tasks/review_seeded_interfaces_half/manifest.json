@@ -1,0 +1,24 @@
+{
+ "seeds": [
+  {"id": "S1", "class": "numerical", "file": "mkl_fft/interfaces/_float_utils.py", "lines": [81],
+   "kw": "float16|half|float64|float32|complex64|complex128|upcast|dtype|precision|single"},
+  {"id": "S2", "class": "correctness", "file": "mkl_fft/interfaces/_numpy_fft.py", "lines": [307, 311],
+   "kw": "hfft|norm|swap|direction|scal|forward|backward|1/n"},
+  {"id": "S3", "class": "robustness", "file": "mkl_fft/interfaces/_numpy_fft.py", "lines": [234, 235],
+   "kw": "n\\s*<|<\\s*1|<=\\s*0|zero|n\\s*=\\s*0|off.by.one|negative|data points"},
+  {"id": "S4", "class": "api", "file": "mkl_fft/interfaces/_numpy_fft.py", "lines": [244],
+   "kw": "axes|signature|default|rfft2|all axes|\\(-2, ?-1\\)"},
+  {"id": "S5", "class": "convention", "file": "*", "lines": [129],
+   "kw": "monkey|revers|import.time|at import|side.effect|global|overwrit|restore|permanent|mutat\\w+ (numpy|np)"},
+  {"id": "S6", "class": "tests", "file": "mkl_fft/tests/test_interfaces.py", "lines": [196, 200],
+   "kw": "toleran|rtol|reference|itself|tautolog|vacuous|patched|weak|shape|compare|accuracy|coverage|untested|no test|missing test"},
+  {"id": "S7", "class": "hygiene", "file": "mkl_fft/interfaces/_numpy_fft.py", "lines": [119, 120],
+   "kw": "bare|except|swallow|silent|catch|broad|hide|mask|error"}
+ ],
+ "decoys": [
+  {"id": "D1", "file": "mkl_fft/interfaces/_numpy_fft.py", "lines": [115, 116],
+   "kw": "long ?double|float128|clongdouble|downcast"},
+  {"id": "D2", "file": "mkl_fft/interfaces/_numpy_fft.py", "lines": [310],
+   "kw": "conjugat"}
+ ]
+}

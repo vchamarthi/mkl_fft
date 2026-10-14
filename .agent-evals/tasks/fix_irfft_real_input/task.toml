@@ -1,0 +1,25 @@
+version = "1.0"
+
+[metadata]
+family = "fix"
+status = "draft"
+base = "44d10a007c32a25fa2b0f2b80c8ea78733867181"
+created = "2025-05-15"
+source = "https://github.com/IntelPython/mkl_fft/pull/180"
+difficulty = "easy"
+tags = ["irfft", "dtype", "numpy-compat"]
+
+[agent]
+timeout_sec = 3600
+
+[verifier]
+timeout_sec = 1800
+
+[grader]
+type = "hidden_tests"
+# Narrow targets to the tests that fail before the fix and pass after it (node ids for pytest).
+targets = ["mkl_fft/tests/test_repoevals_fix_irfft_real_input_fft1d.py"]
+# Existing tests of the same component that must keep passing.
+regression_targets = ["mkl_fft/tests/test_fft1d.py"]
+root_cause_files = ["mkl_fft/_pydfti.pyx"]
+gate = ["strict_pass"]

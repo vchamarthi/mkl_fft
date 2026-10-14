@@ -1,0 +1,72 @@
+diff --git a/mkl_fft/_pydfti.pyx b/mkl_fft/_pydfti.pyx
+index e6d1d22..5cfd20f 100644
+--- a/mkl_fft/_pydfti.pyx
++++ b/mkl_fft/_pydfti.pyx
+@@ -665,13 +665,12 @@ def _r2c_fft1d_impl(
+         return f_arr
+ 
+ 
+-# this routine is functionally equivalent to numpy.fft.irfft
+ def _c2r_fft1d_impl(
+     x, n=None, axis=-1, overwrite_x=False, double fsc=1.0, out=None
+ ):
+     """
+-    Uses MKL to perform 1D FFT on the real input array x along the given axis,
+-    producing complex output, but giving only half of the harmonics.
++    Uses MKL to perform 1D FFT on the real/complex input array x along the
++    given axis, producing real output.
+ 
+     cf. numpy.fft.irfft
+     """
+@@ -704,13 +703,13 @@ def _c2r_fft1d_impl(
+     else:
+         # we must cast the input and allocate the output,
+         # so we cast to complex double and operate in place
+-        try:
++        if x_type is cnp.NPY_FLOAT:
+             x_arr = <cnp.ndarray> cnp.PyArray_FROM_OTF(
+-                x_arr, cnp.NPY_CDOUBLE, cnp.NPY_BEHAVED)
+-        except:
+-            raise ValueError(
+-                "First argument should be a real or "
+-                "a complex sequence of single or double precision"
++                x_arr, cnp.NPY_CFLOAT, cnp.NPY_BEHAVED
++            )
++        else:
++            x_arr = <cnp.ndarray> cnp.PyArray_FROM_OTF(
++                x_arr, cnp.NPY_CDOUBLE, cnp.NPY_BEHAVED
+             )
+         x_type = cnp.PyArray_TYPE(x_arr)
+         in_place = 1
+diff --git a/mkl_fft/interfaces/_numpy_fft.py b/mkl_fft/interfaces/_numpy_fft.py
+index 8557213..f2f72d5 100644
+--- a/mkl_fft/interfaces/_numpy_fft.py
++++ b/mkl_fft/interfaces/_numpy_fft.py
+@@ -295,13 +295,11 @@ def hfft(a, n=None, axis=-1, norm=None, out=None):
+     """
+     norm = _swap_direction(norm)
+     x = _downcast_float128_array(a)
+-    x = np.array(x, copy=True)
+-    np.conjugate(x, out=x)
+     fsc = _compute_fwd_scale(norm, n, 2 * (x.shape[axis] - 1))
+ 
+     return _trycall(
+         mkl_fft.irfft,
+-        (x,),
++        (np.conjugate(x),),
+         {"n": n, "axis": axis, "fwd_scale": fsc, "out": out},
+     )
+ 
+@@ -317,9 +315,9 @@ def ihfft(a, n=None, axis=-1, norm=None, out=None):
+     x = _downcast_float128_array(a)
+     fsc = _compute_fwd_scale(norm, n, x.shape[axis])
+ 
+-    output = _trycall(
++    result = _trycall(
+         mkl_fft.rfft, (x,), {"n": n, "axis": axis, "fwd_scale": fsc, "out": out}
+     )
+ 
+-    np.conjugate(output, out=output)
+-    return output
++    np.conjugate(result, out=result)
++    return result

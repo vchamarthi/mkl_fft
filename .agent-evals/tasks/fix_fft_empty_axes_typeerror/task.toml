@@ -1,0 +1,25 @@
+version = "1.0"
+
+[metadata]
+family = "fix"
+status = "draft"
+base = "1c0abc54562e394cedfa2868ec30b73771bc334b"
+created = "2026-03-13"
+source = "https://github.com/IntelPython/mkl_fft/pull/288"
+difficulty = "easy"
+tags = ["fftn", "axes", "numpy-compat"]
+
+[agent]
+timeout_sec = 3600
+
+[verifier]
+timeout_sec = 1800
+
+[grader]
+type = "hidden_tests"
+# Narrow targets to the tests that fail before the fix and pass after it (node ids for pytest).
+targets = ["mkl_fft/tests/test_repoevals_fix_fft_empty_axes_typeerror_fftnd.py"]
+# Existing tests of the same component that must keep passing.
+regression_targets = ["mkl_fft/tests/test_fftnd.py::test_s_axes", "mkl_fft/tests/test_fftnd.py::test_s_none_vs_s_full", "mkl_fft/tests/test_fftnd.py::test_repeated_axes", "mkl_fft/tests/test_fftnd.py::Test_Regressions"]
+root_cause_files = ["mkl_fft/_fft_utils.py"]
+gate = ["strict_pass"]

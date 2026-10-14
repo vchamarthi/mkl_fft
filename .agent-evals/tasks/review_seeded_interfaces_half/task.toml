@@ -1,0 +1,18 @@
+version = "1.0"
+
+[metadata]
+family = "review"
+status = "draft"
+base = "a4f2ae2a351a18e103e75cf2ea29b0941ff11ace"
+created = "2026-10-14"
+source = "hand-written: float16 support in the numpy interface"
+difficulty = "medium"
+tags = ["interfaces", "numpy_fft"]
+
+[agent]
+timeout_sec = 1800
+
+[grader]
+type = "review_seeded"
+review_title = "numpy interface: accept float16 input"
+gate = ["recall>=0.6", "precision>=0.5", "decoys_flagged<=0"]

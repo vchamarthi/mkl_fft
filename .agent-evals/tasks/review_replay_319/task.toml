@@ -1,0 +1,17 @@
+version = "1.0"
+
+[metadata]
+family = "review"
+status = "draft"
+base = "38ed4cf9a1ede61bc2b73d45b58966d33efb9d4a"
+created = "2026-05-28"
+source = "https://github.com/IntelPython/mkl_fft/pull/319"
+tags = []
+
+[agent]
+timeout_sec = 1800
+
+[grader]
+type = "review_replay"
+review_title = "task: module CLI patching methods"
+gate = ["recall>=0.3", "precision>=0.3"]

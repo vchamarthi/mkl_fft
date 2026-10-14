@@ -1,0 +1,17 @@
+version = "1.0"
+
+[metadata]
+family = "review"
+status = "draft"
+base = "a4f2ae2a351a18e103e75cf2ea29b0941ff11ace"
+created = "2026-10-14"
+source = "hand-written: clean control (docstring fix + hfft/ihfft round-trip test)"
+difficulty = "easy"
+tags = ["interfaces", "numpy_fft", "clean-control"]
+
+[agent]
+timeout_sec = 1800
+
+[grader]
+type = "review_seeded"
+review_title = "numpy interface: fix hfft docstring typo, add hfft/ihfft round-trip test"

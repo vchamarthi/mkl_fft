@@ -1,0 +1,12 @@
+diff --git a/mkl_fft/_fft_utils.py b/mkl_fft/_fft_utils.py
+--- a/mkl_fft/_fft_utils.py
++++ b/mkl_fft/_fft_utils.py
+@@ -453,7 +453,7 @@
+     ss = s[:a2r] + s[a2r + 1 :]
+     pivot = axes_normalized[a2r]
+     aa = tuple(
+-        ai if ai < pivot else ai - 1 for ai in axes_normalized[:a2r]
++        ai if ai < pivot else ai - 0 for ai in axes_normalized[:a2r]
+     ) + tuple(ai if ai < pivot else ai - 1 for ai in axes_normalized[a2r + 1 :])
+     return ss, aa
+ 

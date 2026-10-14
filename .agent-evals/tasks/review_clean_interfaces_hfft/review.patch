@@ -1,0 +1,34 @@
+diff --git a/mkl_fft/interfaces/_numpy_fft.py b/mkl_fft/interfaces/_numpy_fft.py
+index d752757..64d0637 100644
+--- a/mkl_fft/interfaces/_numpy_fft.py
++++ b/mkl_fft/interfaces/_numpy_fft.py
+@@ -277,7 +277,7 @@ def irfftn(a, s=None, axes=None, norm=None, out=None):
+ def hfft(a, n=None, axis=-1, norm=None, out=None):
+     """
+     Compute the FFT of a signal which has Hermitian symmetry,
+-    i.e., a real spectrum..
++    i.e., a real spectrum.
+ 
+     For full documentation refer to `numpy.fft.hfft`.
+ 
+diff --git a/mkl_fft/tests/test_interfaces.py b/mkl_fft/tests/test_interfaces.py
+index 226d462..90804c9 100644
+--- a/mkl_fft/tests/test_interfaces.py
++++ b/mkl_fft/tests/test_interfaces.py
+@@ -97,6 +97,16 @@ def test_numpy_rfft(norm, dtype):
+     assert np.allclose(x, xx, atol=tol, rtol=tol)
+ 
+ 
++@pytest.mark.parametrize("norm", [None, "forward", "backward", "ortho"])
++@pytest.mark.parametrize("dtype", [np.float32, np.float64])
++def test_numpy_hfft(norm, dtype):
++    x = np.linspace(0, 1, 511).astype(dtype)
++    w = mfi.numpy_fft.ihfft(x, norm=norm)
++    xx = mfi.numpy_fft.hfft(w, n=x.shape[0], norm=norm)
++    tol = 64 * np.finfo(np.dtype(dtype)).eps
++    assert np.allclose(x, xx, atol=tol, rtol=tol)
++
++
+ @pytest.mark.parametrize("norm", [None, "forward", "backward", "ortho"])
+ @pytest.mark.parametrize(
+     "dtype", [np.float32, np.float64, np.complex64, np.complex128]

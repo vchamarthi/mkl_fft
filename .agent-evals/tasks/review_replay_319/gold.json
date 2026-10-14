@@ -1,0 +1,56 @@
+{
+ "pr": 319,
+ "revision": "abc566e188d48f8233ccde2e794398359d55a7de",
+ "threads": [
+  {
+   "file": "mkl_fft/__main__.py",
+   "line": 28,
+   "body": "I think we should use argparse here, dpctl is a good example\nhttps://github.com/IntelPython/dpctl/blob/master/dpctl/__main__.py\n\nit's a bit cleaner",
+   "author": "ndgrigorian",
+   "url": "https://github.com/IntelPython/mkl_fft/pull/319#discussion_r3269431986"
+  },
+  {
+   "file": "mkl_fft/patch.py",
+   "line": 51,
+   "body": "I guess it would be proper to have that as a warning, rather then default trace to the console.",
+   "author": "antonwolfy",
+   "url": "https://github.com/IntelPython/mkl_fft/pull/319#discussion_r3273337832"
+  },
+  {
+   "file": "mkl_fft/patch.py",
+   "line": 61,
+   "body": "I believe it should be only traced under verbose mode",
+   "author": "antonwolfy",
+   "url": "https://github.com/IntelPython/mkl_fft/pull/319#discussion_r3273342473"
+  },
+  {
+   "file": "mkl_fft/tests/test_cli.py",
+   "line": 58,
+   "body": "It should be warning raised at second installation and then we will verify that here through appropriate pytest i/f.",
+   "author": "antonwolfy",
+   "url": "https://github.com/IntelPython/mkl_fft/pull/319#discussion_r3273354473"
+  },
+  {
+   "file": "mkl_fft/__main__.py",
+   "line": 43,
+   "body": "Why do we need the second `python` in the command? Is there any use case when we will run something different from python file?",
+   "author": "antonwolfy",
+   "url": "https://github.com/IntelPython/mkl_fft/pull/319#discussion_r3273396689"
+  },
+  {
+   "file": "mkl_fft/tests/test_cli.py",
+   "line": 61,
+   "body": "Do we have a better way to check the patch is enabled through importing mkl_fft and checking `mkl_fft.is_patched()` result?",
+   "author": "antonwolfy",
+   "url": "https://github.com/IntelPython/mkl_fft/pull/319#discussion_r3273413480"
+  },
+  {
+   "file": "mkl_fft/patch.py",
+   "line": 63,
+   "body": "Would it be better to handle through raising an exception?",
+   "author": "antonwolfy",
+   "url": "https://github.com/IntelPython/mkl_fft/pull/319#discussion_r3273450103"
+  }
+ ],
+ "dropped": []
+}

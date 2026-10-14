@@ -1,0 +1,42 @@
+{
+ "pr": 370,
+ "revision": "db030bac11cccb669d63498d34a3f3275a88b399",
+ "threads": [
+  {
+   "file": "mkl_fft/tests/test_dispatch_equivalence.py",
+   "line": 52,
+   "body": "It looks like `numpy.fft` may be patched to `mkl_fft` when NumPy is installed from Intel channels (software.repos.intel.com/python/conda or gold)\n ```\n$ python -c \"import numpy as np; print(np.fft.fftn.__module__)\"\nmkl_fft.interfaces._numpy_fft\n```\nThis means the tests may not always use the real `numpy.fft` implementation as the reference, contrary to the docstring on 35 line\n\nCould we use the NumPy implementation directly instead? Something like this?\n```\nfrom numpy.fft import _pocketfft as npfft\n```\nand use npfft.* for the reference calls",
+   "author": "vlad-perevezentsev",
+   "url": "https://github.com/IntelPython/mkl_fft/pull/370#discussion_r4025043193"
+  },
+  {
+   "file": "mkl_fft/_fft_utils.py",
+   "line": 81,
+   "body": "This function almost exactly replicates the logic in `_cook_nd_args`\nIt looks like we can reuse it\nSomething like this\n```\ndef _nd_fwd_scale(x, s, axes, norm, invreal=False):\n    \"\"\"Forward scale of an N-D transform, normalized over the transformed axes.\n\n    ``_compute_fwd_scale`` falls back to the full array shape when ``s`` is\n    None, which over-normalizes a subset-of-axes transform; for c2r the basis\n    is the output length ``2 * (n - 1)``. Both are exactly what\n    ``_cook_nd_args`` already resolves for the transform itself.\n    \"\"\"\n    _check_norm(norm)\n    if norm in (None, \"backward\"):\n        return 1.0\n    if s is None:\n        s, _ = _cook_nd_args(x, s, axes, invreal=invreal)\n    return _compute_fwd_scale(norm, s, x.shape)\n```\n\n`return _compute_fwd_scale(norm, s, x.shape)` will also help reduce the code in the fft functions \n```\nfsc = _nd_fwd_scale(x, s, axes, norm)\n\n#instead of \n\nss = _compute_nd_scale_shape(x, s, axes, norm)\nfsc = _compute_fwd_scale(norm, ss, x.shape)\n`",
+   "author": "vlad-perevezentsev",
+   "url": "https://github.com/IntelPython/mkl_fft/pull/370#discussion_r4025048453"
+  },
+  {
+   "file": "mkl_fft/tests/test_dispatch_equivalence.py",
+   "line": 258,
+   "body": "It overlaps `test_empty_axes` and `test_empty_axes_returns_same_object` in `test_fftnd.py` almost entirely \nCould be removed ",
+   "author": "vlad-perevezentsev",
+   "url": "https://github.com/IntelPython/mkl_fft/pull/370#discussion_r4025239721"
+  },
+  {
+   "file": "mkl_fft/tests/test_dispatch_equivalence.py",
+   "line": 76,
+   "body": "Could we add negative axes to `_AXES_3D`?",
+   "author": "vlad-perevezentsev",
+   "url": "https://github.com/IntelPython/mkl_fft/pull/370#discussion_r4025333418"
+  },
+  {
+   "file": "mkl_fft/tests/test_dispatch_equivalence.py",
+   "line": 412,
+   "body": "A few combinations on the new code path are not covered yet : negative axes with norm . irfftn with subset axes, s, and norm , out= with s= and norm and fft2/rfft2/irfft2 with s and norm",
+   "author": "vlad-perevezentsev",
+   "url": "https://github.com/IntelPython/mkl_fft/pull/370#discussion_r4025342491"
+  }
+ ],
+ "dropped": []
+}

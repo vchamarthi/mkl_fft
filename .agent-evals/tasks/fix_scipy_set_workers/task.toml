@@ -1,0 +1,25 @@
+version = "1.0"
+
+[metadata]
+family = "fix"
+status = "draft"
+base = "d3f7e2dfaf6111d5f772f9efd56fca47d458a7f7"
+created = "2025-05-19"
+source = "https://github.com/IntelPython/mkl_fft/pull/183"
+difficulty = "medium"
+tags = ["scipy-interface", "workers", "threading"]
+
+[agent]
+timeout_sec = 3600
+
+[verifier]
+timeout_sec = 1800
+
+[grader]
+type = "hidden_tests"
+# Narrow targets to the tests that fail before the fix and pass after it (node ids for pytest).
+targets = ["mkl_fft/tests/third_party/scipy/test_repoevals_fix_scipy_set_workers_multithreading.py"]
+# Existing tests of the same component that must keep passing.
+regression_targets = ["mkl_fft/tests/third_party/scipy/test_multithreading.py::test_threaded_same"]
+root_cause_files = ["mkl_fft/interfaces/_scipy_fft.py"]
+gate = ["strict_pass"]

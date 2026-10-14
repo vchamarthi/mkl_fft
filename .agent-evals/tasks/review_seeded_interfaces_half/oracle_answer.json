@@ -1,0 +1,51 @@
+[
+ {
+  "file": "mkl_fft/interfaces/_float_utils.py",
+  "line": 81,
+  "severity": "major",
+  "rule": "numerical",
+  "message": "float16 input is upcast to float64, so results are complex128; NumPy and the repo's own float16 helper use float32 (complex64), changing the output dtype and doubling memory"
+ },
+ {
+  "file": "mkl_fft/interfaces/_numpy_fft.py",
+  "line": 307,
+  "severity": "major",
+  "rule": "correctness",
+  "message": "hfft no longer swaps the norm direction before calling irfft, so with norm=None/'forward'/'backward' the scaling is wrong (off by a factor of n) versus numpy.fft.hfft"
+ },
+ {
+  "file": "mkl_fft/interfaces/_numpy_fft.py",
+  "line": 234,
+  "severity": "minor",
+  "rule": "robustness",
+  "message": "validation uses n < 0, so n=0 passes through; NumPy raises ValueError for n < 1 (invalid number of data points), off-by-one"
+ },
+ {
+  "file": "mkl_fft/interfaces/_numpy_fft.py",
+  "line": 244,
+  "severity": "major",
+  "rule": "api",
+  "message": "rfft2 default axes changed from (-2, -1) to None, which transforms all axes for ndim > 2 and breaks the numpy.fft signature/behaviour (irfft2 still uses (-2, -1))"
+ },
+ {
+  "file": "mkl_fft/interfaces/_numpy_fft.py",
+  "line": 129,
+  "severity": "major",
+  "rule": "convention",
+  "message": "_install_half_support monkey-patches numpy.fft at import time, globally, without saving originals or providing a restore; interface patching must be explicit, reversible and documented (see mkl_fft.patch)"
+ },
+ {
+  "file": "mkl_fft/tests/test_interfaces.py",
+  "line": 196,
+  "severity": "minor",
+  "rule": "tests",
+  "message": "the float16 test compares against np.fft which the import has just replaced by the same functions (tautological), uses rtol=1e-1 and shape only, and does not cover irfft/hfft or complex dtype/norm cases"
+ },
+ {
+  "file": "mkl_fft/interfaces/_numpy_fft.py",
+  "line": 119,
+  "severity": "minor",
+  "rule": "hygiene",
+  "message": "bare except swallows every exception (including real errors from asarray/upcast) and silently returns the input"
+ }
+]

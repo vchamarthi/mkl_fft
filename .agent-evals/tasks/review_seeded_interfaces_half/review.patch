@@ -1,0 +1,162 @@
+diff --git a/mkl_fft/interfaces/_float_utils.py b/mkl_fft/interfaces/_float_utils.py
+index af0f1da..ac0b0d2 100644
+--- a/mkl_fft/interfaces/_float_utils.py
++++ b/mkl_fft/interfaces/_float_utils.py
+@@ -72,6 +72,16 @@ def _downcast_float128_array(x):
+     return x
+ 
+ 
++def _upcast_half(x):
++    """
++    Used in _numpy_fft to upcast float16 input, since MKL has no
++    half-precision routines
++    """
++    if x.dtype == np.half:
++        return x.astype(np.float64)
++    return x
++
++
+ def _supported_array_or_not_implemented(x):
+     """
+     Used in _scipy_fft to convert array to float32, float64, complex64,
+diff --git a/mkl_fft/interfaces/_numpy_fft.py b/mkl_fft/interfaces/_numpy_fft.py
+index d752757..b61a010 100644
+--- a/mkl_fft/interfaces/_numpy_fft.py
++++ b/mkl_fft/interfaces/_numpy_fft.py
+@@ -36,7 +36,7 @@ import numpy as np
+ import mkl_fft
+ 
+ from .._fft_utils import _swap_direction
+-from ._float_utils import _downcast_float128_array
++from ._float_utils import _downcast_float128_array, _upcast_half
+ 
+ __all__ = [
+     "fft",
+@@ -111,6 +111,26 @@ def _trycall(func, args, kwrds):
+     return res
+ 
+ 
++def _prepare_input(a):
++    # long double input is intentionally downcast, not rejected
++    x = _downcast_float128_array(a)
++    try:
++        x = _upcast_half(np.asarray(x))
++    except:  # noqa: E722
++        pass
++    return x
++
++
++def _install_half_support():
++    """
++    Let ``numpy.fft`` accept float16 input by routing the 1-D transforms
++    through this module.
++    """
++    np.fft.fft = fft
++    np.fft.ifft = ifft
++    np.fft.rfft = rfft
++
++
+ def fft(a, n=None, axis=-1, norm=None, out=None):
+     """
+     Compute the one-dimensional discrete Fourier Transform.
+@@ -118,7 +138,7 @@ def fft(a, n=None, axis=-1, norm=None, out=None):
+     For full documentation refer to `numpy.fft.fft`.
+ 
+     """
+-    x = _downcast_float128_array(a)
++    x = _prepare_input(a)
+     return _trycall(
+         mkl_fft.fft, (x,), {"n": n, "axis": axis, "norm": norm, "out": out}
+     )
+@@ -131,7 +151,7 @@ def ifft(a, n=None, axis=-1, norm=None, out=None):
+     For full documentation refer to `numpy.fft.ifft`.
+ 
+     """
+-    x = _downcast_float128_array(a)
++    x = _prepare_input(a)
+     return _trycall(
+         mkl_fft.ifft, (x,), {"n": n, "axis": axis, "norm": norm, "out": out}
+     )
+@@ -196,7 +216,7 @@ def rfft(a, n=None, axis=-1, norm=None, out=None):
+     For full documentation refer to `numpy.fft.rfft`.
+ 
+     """
+-    x = _downcast_float128_array(a)
++    x = _prepare_input(a)
+ 
+     return _trycall(
+         mkl_fft.rfft, (x,), {"n": n, "axis": axis, "norm": norm, "out": out}
+@@ -210,7 +230,9 @@ def irfft(a, n=None, axis=-1, norm=None, out=None):
+     For full documentation refer to `numpy.fft.irfft`.
+ 
+     """
+-    x = _downcast_float128_array(a)
++    x = _prepare_input(a)
++    if n is not None and n < 0:
++        raise ValueError(f"Invalid number of FFT data points ({n}) specified.")
+ 
+     return _trycall(
+         mkl_fft.irfft,
+@@ -219,7 +241,7 @@ def irfft(a, n=None, axis=-1, norm=None, out=None):
+     )
+ 
+ 
+-def rfft2(a, s=None, axes=(-2, -1), norm=None, out=None):
++def rfft2(a, s=None, axes=None, norm=None, out=None):
+     """
+     Compute the 2-dimensional FFT of a real array.
+ 
+@@ -282,8 +304,7 @@ def hfft(a, n=None, axis=-1, norm=None, out=None):
+     For full documentation refer to `numpy.fft.hfft`.
+ 
+     """
+-    norm = _swap_direction(norm)
+-    x = _downcast_float128_array(a)
++    x = _prepare_input(a)
+     return _trycall(
+         mkl_fft.irfft,
+         (np.conjugate(x),),
+@@ -299,7 +320,7 @@ def ihfft(a, n=None, axis=-1, norm=None, out=None):
+ 
+     """
+     norm = _swap_direction(norm)
+-    x = _downcast_float128_array(a)
++    x = _prepare_input(a)
+ 
+     result = _trycall(
+         mkl_fft.rfft, (x,), {"n": n, "axis": axis, "norm": norm, "out": out}
+diff --git a/mkl_fft/interfaces/numpy_fft.py b/mkl_fft/interfaces/numpy_fft.py
+index 6c36e65..5000a64 100644
+--- a/mkl_fft/interfaces/numpy_fft.py
++++ b/mkl_fft/interfaces/numpy_fft.py
+@@ -25,6 +25,7 @@
+ 
+ # pylint: disable=no-name-in-module
+ from ._numpy_fft import (
++    _install_half_support,
+     fft,
+     fft2,
+     fftn,
+@@ -62,3 +63,5 @@ __all__ = [
+     "rfftfreq",
+     "ifftshift",
+ ]
++
++_install_half_support()
+diff --git a/mkl_fft/tests/test_interfaces.py b/mkl_fft/tests/test_interfaces.py
+index 226d462..e479858 100644
+--- a/mkl_fft/tests/test_interfaces.py
++++ b/mkl_fft/tests/test_interfaces.py
+@@ -189,3 +189,12 @@ def test_axes(interface):
+ )
+ def test_interface_helper_functions(interface, func):
+     assert hasattr(interface, func)
++
++
++@pytest.mark.parametrize("func", ["fft", "ifft", "rfft"])
++def test_numpy_fft_float16(func):
++    x = np.linspace(0, 1, 64).astype(np.float16)
++    res = getattr(mfi.numpy_fft, func)(x)
++    exp = getattr(np.fft, func)(x)
++    assert res.shape == exp.shape
++    np.testing.assert_allclose(res, exp, rtol=1e-1)

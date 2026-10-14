@@ -1,0 +1,12 @@
+diff --git a/mkl_fft/_fft_utils.py b/mkl_fft/_fft_utils.py
+--- a/mkl_fft/_fft_utils.py
++++ b/mkl_fft/_fft_utils.py
+@@ -450,7 +450,7 @@
+     axes_normalized = tuple(lens + ai if ai < 0 else ai for ai in axes)
+     a2r = lens + axis_to_remove if axis_to_remove < 0 else axis_to_remove
+ 
+-    ss = s[:a2r] + s[a2r + 1 :]
++    ss = s[:(a2r) + 1] + s[a2r + 1 :]
+     pivot = axes_normalized[a2r]
+     aa = tuple(
+         ai if ai < pivot else ai - 1 for ai in axes_normalized[:a2r]

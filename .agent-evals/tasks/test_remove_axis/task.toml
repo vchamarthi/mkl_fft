@@ -1,0 +1,20 @@
+version = "1.0"
+
+[metadata]
+family = "test"
+status = "draft"
+base = "a4f2ae2a351a18e103e75cf2ea29b0941ff11ace"
+created = "2026-10-14"
+source = "mutants of _remove_axis in mkl_fft/_fft_utils.py"
+tags = ["mutation"]
+
+[agent]
+timeout_sec = 2400
+
+[verifier]
+timeout_sec = 1800
+
+[grader]
+type = "mutation"
+min_kill = 0.8
+oracle_min_kill = 1.0
