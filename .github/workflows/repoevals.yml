@@ -1,0 +1,71 @@
+name: repoevals
+
+# Validates and self-checks the agent-evaluation tasks in .agent-evals/ (no model, no secrets).
+
+on:
+  push:
+    branches: [repoevals]
+    paths: [".agent-evals/**", "repoevals.toml", ".github/workflows/repoevals.yml"]
+  pull_request:
+    paths: [".agent-evals/**", "repoevals.toml", ".github/workflows/repoevals.yml"]
+  workflow_dispatch:
+    inputs:
+      tasks:
+        description: "task selection (empty: all)"
+        default: ""
+      repeats:
+        description: "reference-solution repeats"
+        default: "2"
+      smoke:
+        description: "only build the project once and time it"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    if: github.event_name == 'workflow_dispatch' && inputs.smoke
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install -r .agent-evals/requirements.txt
+      - name: build and test (timed)
+        run: |
+          time pip install -q --no-build-isolation --no-deps -e .
+          time python -m pytest -q -p no:randomly mkl_fft/tests/test_fft1d.py | tail -3
+
+  check:
+    if: github.event_name != 'workflow_dispatch' || !inputs.smoke
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Fetch upstream tags (task bases)
+        run: git fetch -q --no-tags https://github.com/IntelPython/mkl_fft.git 'refs/tags/*:refs/tags/*'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: |
+          python -m pip install -r .agent-evals/requirements.txt \
+            "repoevals @ git+https://github.com/vchamarthi/repoevals@main"
+      - run: repoevals validate --source .
+      - name: repoevals check
+        run: |
+          repoevals check --repeats "${{ inputs.repeats || '2' }}" --keep "$RUNNER_TEMP/check" \
+            --json "$RUNNER_TEMP/check.json" ${{ inputs.tasks }}
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: repoevals-check
+          path: |
+            ${{ runner.temp }}/check.json
+            ${{ runner.temp }}/check/**/grade.json
+            ${{ runner.temp }}/check/**/setup.log
+          if-no-files-found: ignore

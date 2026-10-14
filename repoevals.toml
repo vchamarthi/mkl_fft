@@ -1,0 +1,29 @@
+# repoevals configuration for mkl_fft — https://github.com/vchamarthi/repoevals
+#
+# Each workspace is built from source (meson-python, MKL from PyPI `mkl-devel`) once before the agent starts;
+# graders rebuild only when compiled sources or build files change.
+[repo]
+id = "mkl_fft"
+url = "https://github.com/IntelPython/mkl_fft"
+upstream = "https://github.com/IntelPython/mkl_fft.git"
+tasks = ".agent-evals/tasks"
+
+[guidance]
+globs = ["**/AGENTS.md", "**/CLAUDE.md", ".claude/**", ".github/copilot-instructions.md", ".github/instructions/*.md"]
+
+[policy]
+test_globs = ["mkl_fft/tests/**"]
+library_globs = ["mkl_fft/**"]
+protected_globs = ["mkl_fft/tests/third_party/**"]
+
+[environment]
+setup = "pip install -q --no-build-isolation --no-deps -e ."
+setup_timeout_sec = 1800
+
+[test]
+adapter = "pytest"
+build = "pip install -q --no-build-isolation --no-deps -e ."
+rebuild_globs = ["**/meson.build", "pyproject.toml", "**/*.src", "**/*.pyx", "**/*.pxd", "**/*.c", "**/*.h"]
+command = "python -m pytest -q -p no:randomly -p no:cacheprovider {targets}"
+timeout_sec = 1800
+env = { MKL_NUM_THREADS = "2", OMP_NUM_THREADS = "2" }

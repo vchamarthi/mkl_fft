@@ -1,0 +1,9 @@
+meson-python>=0.13.0
+ninja
+cmake
+cython
+numpy>=1.26.4
+mkl-devel
+mkl-service
+scipy>=1.10
+pytest
