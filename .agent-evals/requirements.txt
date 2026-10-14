@@ -7,3 +7,4 @@ mkl-devel
 mkl-service
 scipy>=1.10
 pytest
+setuptools>=77
