@@ -1,7 +1,7 @@
 meson-python>=0.13.0
 ninja
 cmake
-cython
+cython<3.3  # 3.3 dropped legacy NumPy names used by older task bases
 numpy>=1.26.4
 mkl-devel
 mkl-service

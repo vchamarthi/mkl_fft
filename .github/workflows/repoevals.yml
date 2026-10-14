@@ -55,6 +55,9 @@ jobs:
       - run: |
           python -m pip install -r .agent-evals/requirements.txt \
             "repoevals @ git+https://github.com/vchamarthi/repoevals@main"
+          # pip's MKL ships libmkl_rt.so.2 only; setuptools-era bases link with -lmkl_rt
+          P=$(python -c "import sys; print(sys.prefix)")
+          ln -sf "$(ls $P/lib/libmkl_rt.so.* | head -1)" "$P/lib/libmkl_rt.so"
       - run: repoevals validate --source .
       - name: repoevals check
         run: |
