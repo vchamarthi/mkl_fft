@@ -7,7 +7,7 @@ base = "6335c5948a4a9a271e1897e14dfc1d8bf05d8efe"
 created = "2024-07-19"
 source = "https://github.com/IntelPython/mkl_fft/pull/111"
 difficulty = "easy"
-tags = ["fftn", "scale", "dtype"]
+tags = ["fftn", "scale", "dtype", "legacy-env"]
 
 [agent]
 timeout_sec = 3600

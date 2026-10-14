@@ -7,7 +7,7 @@ base = "44d10a007c32a25fa2b0f2b80c8ea78733867181"
 created = "2025-05-15"
 source = "https://github.com/IntelPython/mkl_fft/pull/180"
 difficulty = "easy"
-tags = ["irfft", "dtype", "numpy-compat"]
+tags = ["irfft", "dtype", "numpy-compat", "legacy-env"]
 
 [agent]
 timeout_sec = 3600
