@@ -1,6 +1,7 @@
 # repoevals configuration for mkl_fft — https://github.com/vchamarthi/repoevals
 #
-# Each workspace is built from source (meson-python, MKL from PyPI `mkl-devel`) once before the agent starts;
+# Each workspace is built from source (MKL from PyPI `mkl-devel`; MKLROOT is the Python prefix, which older
+# setuptools-based bases need) once before the agent starts;
 # graders rebuild only when compiled sources or build files change.
 [repo]
 id = "mkl_fft"
@@ -17,12 +18,12 @@ library_globs = ["mkl_fft/**"]
 protected_globs = ["mkl_fft/tests/third_party/**"]
 
 [environment]
-setup = "pip install -q --no-build-isolation --no-deps -e ."
+setup = "MKLROOT=$(python -c \"import sys; print(sys.prefix)\") pip install -q --no-build-isolation --no-deps -e ."
 setup_timeout_sec = 1800
 
 [test]
 adapter = "pytest"
-build = "pip install -q --no-build-isolation --no-deps -e ."
+build = "MKLROOT=$(python -c \"import sys; print(sys.prefix)\") pip install -q --no-build-isolation --no-deps -e ."
 rebuild_globs = ["**/meson.build", "pyproject.toml", "**/*.src", "**/*.pyx", "**/*.pxd", "**/*.c", "**/*.h"]
 command = "python -m pytest -q -p no:randomly -p no:cacheprovider {targets}"
 timeout_sec = 1800
