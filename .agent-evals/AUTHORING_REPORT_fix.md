@@ -35,3 +35,9 @@ Regression targets are narrow node ids (test_fftnd.py subsets, test_fft1d.py, te
 - [ ] Instructions describe user-visible problems without solution
 - [ ] Hidden tests match stated behaviour
 - [ ] `repoevals check` OK in Linux CI; approve with `repoevals author approve`
+
+## Follow-up from `repoevals check` (CI)
+
+- `fix_fftn_scale_fallback` was dropped: its base (July 2024) is Python 2-era Cython code (`PyInt_AsLong`) that cannot be built on Python 3.12, so no reference run can pass.
+- `fix_irfft_real_input` and `fix_scipy_set_workers` (bases from May 2025) use NumPy Cython names removed in NumPy 2.3; they are tagged `legacy-env` and checked in a CI profile with `numpy<2.3`.
+- `fix_fft_empty_axes_*` and the review tasks (2026 bases) use the default profile.
