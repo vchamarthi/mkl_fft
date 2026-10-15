@@ -1,0 +1,53 @@
+# AGENTS.md — mkl_fft
+
+Entry point for agent context in this repo.
+
+## What this project is
+`mkl_fft` is a NumPy/SciPy-compatible FFT interface backed by Intel® oneMKL.
+It provides accelerated FFT transforms while aiming to preserve upstream API behavior.
+
+## Key components
+- **Package:** `mkl_fft/`
+- **Cython bindings:** `mkl_fft/_pydfti.pyx`
+- **Template-based C backend:** `mkl_fft/src/*.c.src`
+- **Interface adapters:** `mkl_fft/interfaces/`
+- **Tests:** `mkl_fft/tests/`
+- **Vendored helpers:** `_vendored/`
+- **Packaging:** `conda-recipe/`, `conda-recipe-cf/`
+- **Benchmarks:** `benchmarks/`
+
+## Build/runtime basics
+- Build system: `pyproject.toml` + `meson.build`
+- Build deps: `cython>=3.1.0`, `numpy`, `mkl-devel`, `meson-python`, `cmake`, `ninja`
+- Runtime deps: `numpy`, `mkl-service`
+- Dev setup and commands: see `CONTRIBUTING.md`. Build in place with `pip install -e . --no-build-isolation --verbose`; run tests with `pytest mkl_fft/tests` (one file: `pytest mkl_fft/tests/test_fftnd.py`).
+- `timeout` is not installed by default on macOS. Use `gtimeout` after `brew install coreutils`, or run the command without a timeout wrapper.
+
+## Development guardrails
+- Preserve NumPy/SciPy FFT API compatibility unless change is explicitly requested.
+- Edit template sources (`*.c.src`), not generated C artifacts.
+- Pair behavior changes with tests and keep diffs minimal.
+- If interface-level patching/wrapping behavior is changed, keep it explicit, reversible, and documented.
+- Avoid hardcoding mutable versions/matrices/channels in docs.
+- Record user-visible changes under the `## [dev]` section of `CHANGELOG.md` (Keep a Changelog format).
+
+## Where truth lives
+- Build/config: `pyproject.toml`, `meson.build`
+- Dependencies: `pyproject.toml`, `conda-recipe*/meta.yaml`
+- CI/workflows: `.github/workflows/*.{yml,yaml}`
+- Public API: `mkl_fft/__init__.py`, `mkl_fft/interfaces/` (including wrapper/patch adapter modules)
+- Tests: `mkl_fft/tests/`
+
+For behavior policy, see `.github/copilot-instructions.md`.
+
+## Directory map
+Use nearest local `AGENTS.md` when present:
+- `.github/AGENTS.md` — CI workflows and automation policy
+- `mkl_fft/AGENTS.md` — package-level implementation context
+- `mkl_fft/interfaces/AGENTS.md` — NumPy/SciPy interface adapters
+- `mkl_fft/src/AGENTS.md` — C template backend rules
+- `mkl_fft/tests/AGENTS.md` — test scope/conventions
+- `conda-recipe/AGENTS.md` — Intel-channel conda packaging
+- `conda-recipe-cf/AGENTS.md` — conda-forge recipe context
+- `_vendored/AGENTS.md` — vendored tooling boundaries
+- `benchmarks/AGENTS.md` — ASV performance suite
