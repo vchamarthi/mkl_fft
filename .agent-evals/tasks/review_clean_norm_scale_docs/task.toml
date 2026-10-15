@@ -1,0 +1,18 @@
+version = "1.0"
+
+[metadata]
+family = "review"
+status = "draft"
+base = "4e84e7e1dbfa958a7b450b8136b046165a3f4924"
+created = "2026-10-14"
+source = "synthetic clean control: docstring for _compute_fwd_scale and a 1-D norm/n test"
+difficulty = "easy"
+tags = ["review", "control"]
+
+[agent]
+timeout_sec = 900
+
+[grader]
+type = "review_seeded"
+review_title = "Document _compute_fwd_scale and test norm with explicit n"
+max_findings_clean = 2

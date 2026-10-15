@@ -1,0 +1,18 @@
+version = "1.0"
+
+[metadata]
+family = "review"
+status = "draft"
+base = "4e84e7e1dbfa958a7b450b8136b046165a3f4924"
+created = "2026-10-14"
+source = "synthetic seeded review: next_fast_len/prev_fast_len for the SciPy interface"
+difficulty = "medium"
+tags = ["review", "seeded", "scipy-interface"]
+
+[agent]
+timeout_sec = 1200
+
+[grader]
+type = "review_seeded"
+review_title = "Add next_fast_len and prev_fast_len to the SciPy interface"
+gate = ["recall>=0.6", "precision>=0.5", "decoys_flagged<=0"]

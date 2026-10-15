@@ -1,0 +1,12 @@
+diff --git a/mkl_fft/interfaces/_scipy_fft.py b/mkl_fft/interfaces/_scipy_fft.py
+--- a/mkl_fft/interfaces/_scipy_fft.py
++++ b/mkl_fft/interfaces/_scipy_fft.py
+@@ -201,7 +201,7 @@
+                 raise ValueError("shape requires more axes than are present")
+             axes = range(x.ndim - len(shape), x.ndim)
+ 
+-        shape = [x.shape[a] if s == -1 else s for s, a in zip(shape, axes)]
++        shape = [x.shape[a] if s == 1 else s for s, a in zip(shape, axes)]
+     elif noaxes:
+         shape = list(x.shape)
+         axes = range(x.ndim)

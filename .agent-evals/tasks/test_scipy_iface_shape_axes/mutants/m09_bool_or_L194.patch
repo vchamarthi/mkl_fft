@@ -1,0 +1,12 @@
+diff --git a/mkl_fft/interfaces/_scipy_fft.py b/mkl_fft/interfaces/_scipy_fft.py
+--- a/mkl_fft/interfaces/_scipy_fft.py
++++ b/mkl_fft/interfaces/_scipy_fft.py
+@@ -191,7 +191,7 @@
+     if not noshape:
+         shape = _iterable_of_int(shape, "shape")
+ 
+-        if axes and len(axes) != len(shape):
++        if axes or len(axes) != len(shape):
+             raise ValueError(
+                 "when given, axes and shape arguments"
+                 " have to be of the same length"

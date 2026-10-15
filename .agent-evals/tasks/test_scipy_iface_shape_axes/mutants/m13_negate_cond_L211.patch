@@ -1,0 +1,12 @@
+diff --git a/mkl_fft/interfaces/_scipy_fft.py b/mkl_fft/interfaces/_scipy_fft.py
+--- a/mkl_fft/interfaces/_scipy_fft.py
++++ b/mkl_fft/interfaces/_scipy_fft.py
+@@ -208,7 +208,7 @@
+     else:
+         shape = [x.shape[a] for a in axes]
+ 
+-    if noshape and invreal:
++    if not (noshape and invreal):
+         shape[-1] = (x.shape[axes[-1]] - 1) * 2
+ 
+     if any(s < 1 for s in shape):

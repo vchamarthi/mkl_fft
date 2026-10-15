@@ -1,0 +1,24 @@
+version = "1.0"
+
+[metadata]
+family = "numeric"
+status = "draft"
+base = "4e84e7e1dbfa958a7b450b8136b046165a3f4924"
+created = "2026-10-14"
+source = "injected (setup.patch): N-D Hermitian-symmetry fill in the real-to-complex N-D backend mirrors only the last axis"
+difficulty = "medium"
+tags = ["fftn", "real-input", "c-backend", "injected"]
+
+[agent]
+timeout_sec = 3600
+
+[verifier]
+timeout_sec = 1800
+
+[grader]
+type = "numeric"
+probe = "probe.py"
+python = "python"
+min_case_pass = 1.0
+# the existing N-D tests must pass as well
+targets = ["mkl_fft/tests/test_fftnd.py", "mkl_fft/tests/test_dispatch_equivalence.py"]

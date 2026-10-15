@@ -1,0 +1,12 @@
+diff --git a/mkl_fft/_fft_utils.py b/mkl_fft/_fft_utils.py
+--- a/mkl_fft/_fft_utils.py
++++ b/mkl_fft/_fft_utils.py
+@@ -81,7 +81,7 @@
+         nn = math.prod(ss)
+     else:
+         nn = np.prod(ss)
+-    fsc = 1 / nn if nn != 0 else 1
++    fsc = 1 / nn if nn != 1 else 1
+     if norm == "forward":
+         return fsc
+     else:  # norm == "ortho"

@@ -1,0 +1,12 @@
+diff --git a/mkl_fft/_fft_utils.py b/mkl_fft/_fft_utils.py
+--- a/mkl_fft/_fft_utils.py
++++ b/mkl_fft/_fft_utils.py
+@@ -71,7 +71,7 @@
+     if norm in (None, "backward"):
+         return 1.0
+ 
+-    ss = n if n is not None else shape
++    ss = n if n is None else shape
+     # Avoid np.prod's array-creation overhead on the hot scalar (1-D) and
+     # sequence (N-D) paths; np.prod stays as the fallback for array-like
+     # `n`/`s` (e.g. np.array(8)) that math.prod can't handle.

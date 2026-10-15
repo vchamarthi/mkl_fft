@@ -1,0 +1,31 @@
+version = "1.0"
+
+[metadata]
+family = "fix"
+status = "draft"
+base = "1c0abc54562e394cedfa2868ec30b73771bc334b"
+created = "2026-03-13"
+source = "https://github.com/IntelPython/mkl_fft/pull/288 + https://github.com/IntelPython/mkl_fft/pull/293"
+difficulty = "easy"
+tags = ["axes", "fftn", "python"]
+
+[agent]
+timeout_sec = 3600
+
+[verifier]
+timeout_sec = 1800
+
+[grader]
+type = "hidden_tests"
+targets = [
+    "mkl_fft/tests/test_fftnd.py::test_empty_axes",
+    "mkl_fft/tests/test_fftnd.py::test_empty_axes_with_out",
+    "mkl_fft/tests/test_fftnd.py::test_empty_axes_returns_same_object",
+]
+regression_targets = [
+    "mkl_fft/tests/test_fftnd.py",
+    "mkl_fft/tests/test_fft1d.py",
+    "mkl_fft/tests/test_interfaces.py",
+]
+root_cause_files = ["mkl_fft/_fft_utils.py"]
+gate = ["strict_pass"]

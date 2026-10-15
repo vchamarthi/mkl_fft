@@ -1,0 +1,12 @@
+diff --git a/mkl_fft/interfaces/_scipy_fft.py b/mkl_fft/interfaces/_scipy_fft.py
+--- a/mkl_fft/interfaces/_scipy_fft.py
++++ b/mkl_fft/interfaces/_scipy_fft.py
+@@ -185,7 +185,7 @@
+ 
+         if any(a >= x.ndim or a < 0 for a in axes):
+             raise ValueError("axes exceeds dimensionality of input")
+-        if len(set(axes)) != len(axes):
++        if len(set(axes)) == len(axes):
+             raise ValueError("all axes must be unique")
+ 
+     if not noshape:

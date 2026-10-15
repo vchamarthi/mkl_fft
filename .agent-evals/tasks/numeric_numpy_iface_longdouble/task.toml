@@ -1,0 +1,27 @@
+version = "1.0"
+
+[metadata]
+family = "numeric"
+status = "draft"
+base = "4e84e7e1dbfa958a7b450b8136b046165a3f4924"
+created = "2026-10-14"
+source = "injected (setup.patch): long double input to the NumPy interface is converted to single instead of double precision"
+difficulty = "easy"
+tags = ["numpy-interface", "longdouble", "precision", "python", "injected"]
+
+[environment]
+# long double is wider than double only on x86 (80-bit extended); elsewhere the probe cannot detect the bug
+requires = { cpu_flags = ["sse2"] }
+
+[agent]
+timeout_sec = 3600
+
+[verifier]
+timeout_sec = 1800
+
+[grader]
+type = "numeric"
+probe = "probe.py"
+python = "python"
+min_case_pass = 1.0
+targets = ["mkl_fft/tests/test_interfaces.py"]

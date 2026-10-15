@@ -1,0 +1,12 @@
+diff --git a/mkl_fft/_fft_utils.py b/mkl_fft/_fft_utils.py
+--- a/mkl_fft/_fft_utils.py
++++ b/mkl_fft/_fft_utils.py
+@@ -75,7 +75,7 @@
+     # Avoid np.prod's array-creation overhead on the hot scalar (1-D) and
+     # sequence (N-D) paths; np.prod stays as the fallback for array-like
+     # `n`/`s` (e.g. np.array(8)) that math.prod can't handle.
+-    if isinstance(ss, (int, np.integer)):
++    if not (isinstance(ss, (int, np.integer))):
+         nn = ss
+     elif isinstance(ss, (list, tuple)):
+         nn = math.prod(ss)

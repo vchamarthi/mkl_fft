@@ -1,0 +1,138 @@
+diff --git a/mkl_fft/interfaces/README.md b/mkl_fft/interfaces/README.md
+index c47028a..d12ad8d 100644
+--- a/mkl_fft/interfaces/README.md
++++ b/mkl_fft/interfaces/README.md
+@@ -13,7 +13,7 @@ This interface is a drop-in replacement for the [`numpy.fft`](https://numpy.org/
+ 
+ * Hermitian FFTs: `hfft`, `ihfft`.
+ 
+-* Helper routines: `fftfreq`, `rfftfreq`, `fftshift`, `ifftshift`. These routines serve as a fallback to the NumPy implementation and are included for completeness.
++* Helper routines: `fftfreq`, `rfftfreq`, `fftshift`, `ifftshift`. These routines serve as a fallback to the NumPy implementation and are included for completeness. `next_fast_len` and `prev_fast_len` return lengths that factor into 2, 3, 5 and 7, the radices with optimized OneMKL kernels.
+ 
+ The following example shows how to use this interface for calculating a 1D FFT.
+ 
+@@ -40,7 +40,7 @@ This interface is a drop-in replacement for the [`scipy.fft`](https://scipy.gith
+ 
+ * Hermitian FFTs: `hfft`, `ihfft`, `hfft2`, `ihfft2`, `hfftn`, `ihfftn`.
+ 
+-* Helper functions: `fftshift`, `ifftshift`, `fftfreq`, `rfftfreq`, `set_workers`, `get_workers`. All of these functions, except for `set_workers` and `get_workers`, serve as a fallback to the SciPy implementation and are included for completeness.
++* Helper functions: `fftshift`, `ifftshift`, `fftfreq`, `rfftfreq`, `set_workers`, `get_workers`, `next_fast_len`, `prev_fast_len`. All of these functions, except for `set_workers`, `get_workers`, `next_fast_len` and `prev_fast_len`, serve as a fallback to the SciPy implementation and are included for completeness.
+ 
+ Note that in computing FFTs, the default value of `workers` parameter is the maximum number of threads available unlike the default behavior of SciPy where only one thread is used.
+ 
+diff --git a/mkl_fft/interfaces/_scipy_fft.py b/mkl_fft/interfaces/_scipy_fft.py
+index f9e8404..2f359cf 100644
+--- a/mkl_fft/interfaces/_scipy_fft.py
++++ b/mkl_fft/interfaces/_scipy_fft.py
+@@ -67,6 +67,8 @@ __all__ = [
+     "rfftfreq",
+     "get_workers",
+     "set_workers",
++    "next_fast_len",
++    "prev_fast_len",
+ ]
+ 
+ 
+@@ -740,3 +742,59 @@ def set_workers(workers):
+     finally:
+         if token is not None:
+             _workers_global_settings.reset(token)
++
++
++# Radices with optimized OneMKL FFT kernels: transforms whose length factors
++# into these are the fastest.
++_MKL_FAST_RADICES = (2, 3, 5, 7)
++
++
++def _is_fast_len(n):
++    """Return True if `n` has no prime factors other than the fast radices."""
++    for p in _MKL_FAST_RADICES:
++        while n % p == 0:
++            n = n / p
++    return n == 1
++
++
++def next_fast_len(target, real=False):
++    """
++    Find the next fast size of input data to ``fft``, for zero-padding, etc.
++
++    Returns the smallest composite of 2, 3, 5 and 7 (the radices with
++    optimized OneMKL kernels) that is greater than or equal to `target`.
++
++    For full documentation refer to `scipy.fft.next_fast_len`.
++
++    """
++    # Note: real is not utilized, OneMKL uses the same radices for real and
++    # complex transforms
++    target = operator.index(target)
++    print("next_fast_len:", target)
++    if target < 0:
++        raise ValueError("Target length must be positive")
++    n = target + 1
++    while not _is_fast_len(n):
++        n += 1
++    return n
++
++
++def prev_fast_len(target, real=False):
++    """
++    Find the previous fast size of input data to ``fft``, for truncation.
++
++    Returns the largest composite of 2, 3, 5 and 7 that is less than or equal
++    to `target`.
++
++    For full documentation refer to `scipy.fft.prev_fast_len`.
++
++    """
++    # Note: real is not utilized, OneMKL uses the same radices for real and
++    # complex transforms
++    target = operator.index(target)
++    if target < 1:
++        raise ValueError("Target length must be positive")
++    n = target
++    while not _is_fast_len(n):
++        n -= 1
++    return n
+diff --git a/mkl_fft/interfaces/scipy_fft.py b/mkl_fft/interfaces/scipy_fft.py
+index 2e4d007..c8f4352 100644
+--- a/mkl_fft/interfaces/scipy_fft.py
++++ b/mkl_fft/interfaces/scipy_fft.py
+@@ -44,6 +44,7 @@ from ._scipy_fft import (
+     irfft,
+     irfft2,
+     irfftn,
++    next_fast_len,
+     rfft,
+     rfft2,
+     rfftfreq,
+@@ -76,6 +77,7 @@ __all__ = [
+     "rfftfreq",
+     "get_workers",
+     "set_workers",
++    "next_fast_len",
+ ]
+ 
+ 
+diff --git a/mkl_fft/tests/test_interfaces.py b/mkl_fft/tests/test_interfaces.py
+index 226d462..b32fec6 100644
+--- a/mkl_fft/tests/test_interfaces.py
++++ b/mkl_fft/tests/test_interfaces.py
+@@ -189,3 +189,18 @@ def test_axes(interface):
+ )
+ def test_interface_helper_functions(interface, func):
+     assert hasattr(interface, func)
++
++
++@pytest.mark.parametrize("target", [1, 7, 8, 13, 97, 1000, 2**20 + 1])
++def test_scipy_next_fast_len(target):
++    pytest.importorskip("scipy", reason="requires scipy")
++    n = mfi.scipy_fft.next_fast_len(target)
++    assert n >= target
++
++
++def test_scipy_next_fast_len_invalid():
++    pytest.importorskip("scipy", reason="requires scipy")
++    with pytest.raises(ValueError):
++        mfi.scipy_fft.next_fast_len(-1)
++    with pytest.raises(TypeError):
++        mfi.scipy_fft.next_fast_len(2.5)

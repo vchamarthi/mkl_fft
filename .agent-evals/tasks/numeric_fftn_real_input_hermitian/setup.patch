@@ -1,0 +1,13 @@
+diff --git a/mkl_fft/src/mklfft.c.src b/mkl_fft/src/mklfft.c.src
+index 34df96a..0f58a64 100644
+--- a/mkl_fft/src/mklfft.c.src
++++ b/mkl_fft/src/mklfft.c.src
+@@ -1744,7 +1744,7 @@ int
+                 }
+                 assert(dest_ki >= 0);
+                 assert(dest_ki < ni);
+-                src_ki = (dest_ki) ? ni - dest_ki : dest_ki;
++                src_ki = (i == last_idx) ? ni - dest_ki : dest_ki;
+ 
+                 tmp1 += si * dest_ki;
+                 tmp2 += si * src_ki;

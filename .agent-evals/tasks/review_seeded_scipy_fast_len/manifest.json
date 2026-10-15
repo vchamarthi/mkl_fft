@@ -1,0 +1,24 @@
+{
+  "seeds": [
+    {"id": "S1_off_by_one", "class": "correctness", "file": "mkl_fft/interfaces/_scipy_fft.py", "lines": [776, 777],
+     "kw": "off.by.one|target \\+ 1|start(s|ing)? (at|from) (the )?target|skip(s|ped)? (the )?target|itself|greater than or equal|>= ?target|(8|16|6|1)\\D.{0,20}(returns?|gives?|yields?) (9|17|7|2)\\b|already (a )?fast|smallest"},
+    {"id": "S2_zero_target", "class": "api", "file": "mkl_fft/interfaces/_scipy_fft.py", "lines": [774, 775],
+     "kw": "zero|\\b0\\b|< ?1|<= ?0|non-?positive|positive|scipy raises"},
+    {"id": "S3_float_division", "class": "numerical", "file": "mkl_fft/interfaces/_scipy_fft.py", "lines": [756, 755],
+     "kw": "float|true division|//|integer division|precision|exact|2\\*\\*53|large (n|value|target|length|int)|round"},
+    {"id": "S4_debug_print", "class": "hygiene", "file": "mkl_fft/interfaces/_scipy_fft.py", "lines": [773],
+     "kw": "print|debug|stdout|logging|output"},
+    {"id": "S5_prev_not_exported", "class": "api", "file": "mkl_fft/interfaces/scipy_fft.py", "lines": [47, 80],
+     "kw": "prev_fast_len|export|__all__|import|backend|__ua_function__|dispatch|not (exposed|available|public)"},
+    {"id": "S6_weak_tests", "class": "tests", "file": "mkl_fft/tests/test_interfaces.py", "lines": [198, 195, 194],
+     "kw": ">=|minimal|smallest|weak|only (check|assert|test)s?|exact|expected value|off.by.one|would(n.t| not) (catch|detect|fail)|prev_fast_len|not tested|no test|equal"},
+    {"id": "S7_no_changelog", "class": "conventions", "file": "*", "lines": [],
+     "kw": "changelog"}
+  ],
+  "decoys": [
+    {"id": "D1_real_ignored", "file": "mkl_fft/interfaces/_scipy_fft.py", "lines": [770, 771, 792, 793],
+     "kw": "\\breal\\b.{0,40}(ignor|unused|not (used|utilized|honou?red|respected|supported)|no effect)|(ignor|unused|discard)\\w*.{0,40}\\breal\\b"},
+    {"id": "D2_prev_loop_terminates", "file": "mkl_fft/interfaces/_scipy_fft.py", "lines": [798, 799],
+     "kw": "infinite|never (terminat|end|stop)|forever|unbounded|(reach|go(es)?) (to |below )(0|zero)|lower bound"}
+  ]
+}

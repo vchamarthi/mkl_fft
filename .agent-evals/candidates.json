@@ -1,0 +1,857 @@
+[
+    {
+        "sha": "c13a9a251450ce33d6b6fe29aa5ba17483d7b07d",
+        "date": "2024-07-19",
+        "subject": "Fix gh-109",
+        "pr": 111,
+        "url": "https://github.com/IntelPython/mkl_fft/pull/111",
+        "lib_files": [
+            "mkl_fft/_pydfti.pyx"
+        ],
+        "test_files": [
+            "mkl_fft/tests/test_fftnd.py"
+        ],
+        "lib_lines": 8,
+        "test_lines": 11,
+        "score": 10.5
+    },
+    {
+        "sha": "015aab962a0703e21ed17bdac8699f29e530383b",
+        "date": "2023-03-09",
+        "subject": "Fix float utils",
+        "pr": 77,
+        "url": "https://github.com/IntelPython/mkl_fft/pull/77",
+        "lib_files": [
+            "mkl_fft/_float_utils.py",
+            "mkl_fft/_version.py"
+        ],
+        "test_files": [
+            "mkl_fft/tests/test_interfaces.py"
+        ],
+        "lib_lines": 50,
+        "test_lines": 10,
+        "score": 10.5
+    },
+    {
+        "sha": "b2af92de6ad38997d64255280efdc392355db4ed",
+        "date": "2021-02-24",
+        "subject": "Fixed issue #48",
+        "pr": 56,
+        "url": "https://github.com/IntelPython/mkl_fft/pull/56",
+        "lib_files": [
+            "mkl_fft/_numpy_fft.py",
+            "mkl_fft/_pydfti.pyx"
+        ],
+        "test_files": [
+            "mkl_fft/tests/test_fftnd.py"
+        ],
+        "lib_lines": 71,
+        "test_lines": 19,
+        "score": 10.5
+    },
+    {
+        "sha": "57c67a5df354ea302e85cc2c6d80637755ce7b99",
+        "date": "2026-03-13",
+        "subject": "Fix TypeError with empty axes in FFT functions",
+        "pr": 288,
+        "url": "https://github.com/IntelPython/mkl_fft/pull/288",
+        "lib_files": [
+            "mkl_fft/_fft_utils.py"
+        ],
+        "test_files": [
+            "mkl_fft/tests/test_fftnd.py"
+        ],
+        "lib_lines": 125,
+        "test_lines": 45,
+        "score": 10.5
+    },
+    {
+        "sha": "f9f45234b63fde855ad500a28e546a19ef5e567a",
+        "date": "2026-09-17",
+        "subject": "fix: norm scaling",
+        "pr": 370,
+        "url": "https://github.com/IntelPython/mkl_fft/pull/370",
+        "lib_files": [
+            "mkl_fft/_fft_utils.py",
+            "mkl_fft/_mkl_fft.py"
+        ],
+        "test_files": [
+            "mkl_fft/tests/test_dispatch_equivalence.py"
+        ],
+        "lib_lines": 25,
+        "test_lines": 483,
+        "score": 10.0
+    },
+    {
+        "sha": "dd9c783720f5c854565f4bb1d13db32228dee3a9",
+        "date": "2021-08-18",
+        "subject": "Fixes #64",
+        "pr": 65,
+        "url": "https://github.com/IntelPython/mkl_fft/pull/65",
+        "lib_files": [
+            "mkl_fft/_pydfti.pyx"
+        ],
+        "test_files": [
+            "mkl_fft/tests/test_fftnd.py"
+        ],
+        "lib_lines": 4,
+        "test_lines": 19,
+        "score": 7.5
+    },
+    {
+        "sha": "3ccabb68a602fc63a819291be63ddb8327d9b940",
+        "date": "2023-09-02",
+        "subject": "Adapt to NumPy 1.25",
+        "pr": 88,
+        "url": "https://github.com/IntelPython/mkl_fft/pull/88",
+        "lib_files": [
+            "mkl_fft/_pydfti.pyx",
+            "mkl_fft/_version.py"
+        ],
+        "test_files": [
+            "mkl_fft/tests/test_fft1d.py",
+            "mkl_fft/tests/test_fftnd.py"
+        ],
+        "lib_lines": 8,
+        "test_lines": 10,
+        "score": 7.5
+    },
+    {
+        "sha": "a25a98f8aca906972abddd5430ea024e5800e808",
+        "date": "2022-08-18",
+        "subject":
+            "Fixes NumPy interface bug which did not allow for list/ndarray `axes` or `s` parameters",
+        "pr": 69,
+        "url": "https://github.com/IntelPython/mkl_fft/pull/69",
+        "lib_files": [
+            "mkl_fft/_numpy_fft.py",
+            "mkl_fft/_pydfti.pyx"
+        ],
+        "test_files": [
+            "mkl_fft/tests/test_fftnd.py"
+        ],
+        "lib_lines": 8,
+        "test_lines": 12,
+        "score": 7.5
+    },
+    {
+        "sha": "4e3b7d55cdad009926cb570601afaf0ef5dfd67b",
+        "date": "2018-11-28",
+        "subject": "fix for issue 29",
+        "pr": null,
+        "url":
+            "https://github.com/IntelPython/mkl_fft/commit/4e3b7d55cdad009926cb570601afaf0ef5dfd67b",
+        "lib_files": [
+            "mkl_fft/src/mklfft.c.src"
+        ],
+        "test_files": [
+            "mkl_fft/tests/test_fft1d.py",
+            "mkl_fft/tests/test_fftnd.py"
+        ],
+        "lib_lines": 11,
+        "test_lines": 18,
+        "score": 7.5
+    },
+    {
+        "sha": "6bde33e7c2e1c47da84c2a07ba970e91202bd323",
+        "date": "2025-05-15",
+        "subject": "fix an issue for real inputs of `irfft` (#180)",
+        "pr": 180,
+        "url": "https://github.com/IntelPython/mkl_fft/pull/180",
+        "lib_files": [
+            "mkl_fft/_pydfti.pyx",
+            "mkl_fft/interfaces/_numpy_fft.py"
+        ],
+        "test_files": [
+            "mkl_fft/tests/test_fft1d.py",
+            "mkl_fft/tests/third_party/scipy/test_basic.py"
+        ],
+        "lib_lines": 27,
+        "test_lines": 19,
+        "score": 7.5
+    },
+    {
+        "sha": "88a932a68b84dacf70e90fe1174e8f68909a8561",
+        "date": "2018-08-20",
+        "subject": "BUGFIX: Issue #21",
+        "pr": null,
+        "url":
+            "https://github.com/IntelPython/mkl_fft/commit/88a932a68b84dacf70e90fe1174e8f68909a8561",
+        "lib_files": [
+            "mkl_fft/src/mklfft.c.src"
+        ],
+        "test_files": [
+            "mkl_fft/tests/test_fft1d.py"
+        ],
+        "lib_lines": 51,
+        "test_lines": 22,
+        "score": 7.5
+    },
+    {
+        "sha": "384fcb6e3e81402d7f8c223e3443953ae19a4e9a",
+        "date": "2025-05-19",
+        "subject": "fix issues with `set_workers` (#183)",
+        "pr": 183,
+        "url": "https://github.com/IntelPython/mkl_fft/pull/183",
+        "lib_files": [
+            "mkl_fft/interfaces/README.md",
+            "mkl_fft/interfaces/_scipy_fft.py"
+        ],
+        "test_files": [
+            "mkl_fft/tests/third_party/scipy/test_multithreading.py"
+        ],
+        "lib_lines": 80,
+        "test_lines": 33,
+        "score": 7.5
+    },
+    {
+        "sha": "69bfdbb83f46f7e161f89c764b0bb7607865ee38",
+        "date": "2023-03-13",
+        "subject":
+            "Raise NotImplementedError exception instead of ValueError for non-default plan parameters in scipy fft backend",
+        "pr": 78,
+        "url": "https://github.com/IntelPython/mkl_fft/pull/78",
+        "lib_files": [
+            "mkl_fft/_scipy_fft_backend.py",
+            "mkl_fft/_version.py"
+        ],
+        "test_files": [
+            "mkl_fft/tests/test_interfaces.py"
+        ],
+        "lib_lines": 6,
+        "test_lines": 2,
+        "score": 6.5
+    },
+    {
+        "sha": "d87b5c5b90a04aa37f2eb845f66856022b7ef118",
+        "date": "2026-09-02",
+        "subject": "Fix possible memory leaks in backend",
+        "pr": 373,
+        "url": "https://github.com/IntelPython/mkl_fft/pull/373",
+        "lib_files": [
+            "mkl_fft/_pydfti.pyx",
+            "mkl_fft/src/mklfft.c.src",
+            "mkl_fft/src/multi_iter.h"
+        ],
+        "test_files": [
+            "mkl_fft/tests/test_fftnd.py"
+        ],
+        "lib_lines": 314,
+        "test_lines": 22,
+        "score": 5.5
+    },
+    {
+        "sha": "933b8ed8bcaf8913e83dc05b16b875c8fd191e70",
+        "date": "2025-06-03",
+        "subject": "conditional import scipy_fft (#195)",
+        "pr": 195,
+        "url": "https://github.com/IntelPython/mkl_fft/pull/195",
+        "lib_files": [
+            "mkl_fft/interfaces/__init__.py"
+        ],
+        "test_files": [
+            "mkl_fft/tests/test_interfaces.py",
+            "mkl_fft/tests/third_party/scipy/test_basic.py",
+            "mkl_fft/tests/third_party/scipy/test_multithreading.py"
+        ],
+        "lib_lines": 9,
+        "test_lines": 60,
+        "score": 4.5
+    },
+    {
+        "sha": "5ae4bf4912daa7acc946ca0ac93fd35d6d29c51e",
+        "date": "2026-03-19",
+        "subject": "Use `RuntimeWarning` when unpatching more than patching",
+        "pr": 295,
+        "url": "https://github.com/IntelPython/mkl_fft/pull/295",
+        "lib_files": [
+            "mkl_fft/_patch_numpy.py"
+        ],
+        "test_files": [
+            "mkl_fft/tests/test_patch.py"
+        ],
+        "lib_lines": 12,
+        "test_lines": 8,
+        "score": 4.5
+    },
+    {
+        "sha": "7b36ab36fe1647c895447ae40092599a73f73f0b",
+        "date": "2026-03-18",
+        "subject":
+            "Return input array unchanged when axes=() (ignore out parameter)",
+        "pr": 293,
+        "url": "https://github.com/IntelPython/mkl_fft/pull/293",
+        "lib_files": [
+            "mkl_fft/_fft_utils.py"
+        ],
+        "test_files": [
+            "mkl_fft/tests/test_fftnd.py"
+        ],
+        "lib_lines": 13,
+        "test_lines": 33,
+        "score": 4.5
+    },
+    {
+        "sha": "1c0abc54562e394cedfa2868ec30b73771bc334b",
+        "date": "2026-03-09",
+        "subject":
+            "take fast path if c2c transform does not need padding or trimming",
+        "pr": 283,
+        "url": "https://github.com/IntelPython/mkl_fft/pull/283",
+        "lib_files": [
+            "mkl_fft/_fft_utils.py"
+        ],
+        "test_files": [
+            "mkl_fft/tests/test_fftnd.py"
+        ],
+        "lib_lines": 16,
+        "test_lines": 22,
+        "score": 4.5
+    },
+    {
+        "sha": "01e9cf966600eb796c69b3660f1c00649068c2c1",
+        "date": "2023-03-13",
+        "subject": "Hotfix/scipy fft rfft",
+        "pr": 79,
+        "url": "https://github.com/IntelPython/mkl_fft/pull/79",
+        "lib_files": [
+            "mkl_fft/_scipy_fft_backend.py",
+            "mkl_fft/_version.py"
+        ],
+        "test_files": [
+            "mkl_fft/tests/test_interfaces.py"
+        ],
+        "lib_lines": 17,
+        "test_lines": 20,
+        "score": 4.5
+    },
+    {
+        "sha": "87ef5fb6018716356d9b37edee5ffa0136b627ea",
+        "date": "2025-03-31",
+        "subject": "resolve a few issues (#138)",
+        "pr": 138,
+        "url": "https://github.com/IntelPython/mkl_fft/pull/138",
+        "lib_files": [
+            "mkl_fft/_numpy_fft.py",
+            "mkl_fft/_pydfti.pyx",
+            "mkl_fft/_scipy_fft.py"
+        ],
+        "test_files": [
+            "mkl_fft/tests/test_fftnd.py",
+            "mkl_fft/tests/test_interfaces.py",
+            "mkl_fft/tests/test_pocketfft.py"
+        ],
+        "lib_lines": 148,
+        "test_lines": 77,
+        "score": 4.5
+    },
+    {
+        "sha": "44d10a007c32a25fa2b0f2b80c8ea78733867181",
+        "date": "2025-05-15",
+        "subject": "update handling shape and axes of scipy interface (#181)",
+        "pr": 181,
+        "url": "https://github.com/IntelPython/mkl_fft/pull/181",
+        "lib_files": [
+            "mkl_fft/interfaces/_scipy_fft.py"
+        ],
+        "test_files": [
+            "mkl_fft/tests/third_party/scipy/test_basic.py"
+        ],
+        "lib_lines": 154,
+        "test_lines": 6,
+        "score": 4.5
+    },
+    {
+        "sha": "8f8cd3d5c48fa86b6d15780e9e1cf66b3fb76c21",
+        "date": "2026-03-09",
+        "subject": "Add AGENTS.md and GitHub Copilot instructions (#276)",
+        "pr": 276,
+        "url": "https://github.com/IntelPython/mkl_fft/pull/276",
+        "lib_files": [
+            "mkl_fft/AGENTS.md",
+            "mkl_fft/interfaces/AGENTS.md",
+            "mkl_fft/src/AGENTS.md"
+        ],
+        "test_files": [
+            "mkl_fft/tests/AGENTS.md"
+        ],
+        "lib_lines": 39,
+        "test_lines": 11,
+        "score": 4.0
+    },
+    {
+        "sha": "49949a087af27f62a10881e955d2b0939e58023a",
+        "date": "2025-04-25",
+        "subject": "rename CHANGES.rst to CHANGELOG.md (#167)",
+        "pr": 167,
+        "url": "https://github.com/IntelPython/mkl_fft/pull/167",
+        "lib_files": [
+            "mkl_fft/_scipy_fft.py",
+            "mkl_fft/src/mklfft.c.src"
+        ],
+        "test_files": [
+            "mkl_fft/tests/third_party/numpy/test_fft.py"
+        ],
+        "lib_lines": 4,
+        "test_lines": 2,
+        "score": 3.5
+    },
+    {
+        "sha": "caceac7ea5942dd6b052b0439ce0b93aff30d29e",
+        "date": "2025-04-24",
+        "subject":
+            "change copyright year from year range to starting year (#166)",
+        "pr": 166,
+        "url": "https://github.com/IntelPython/mkl_fft/pull/166",
+        "lib_files": [
+            "mkl_fft/__init__.py",
+            "mkl_fft/_float_utils.py",
+            "mkl_fft/_numpy_fft.py",
+            "mkl_fft/_pydfti.pyx",
+            "mkl_fft/_scipy_fft.py",
+            "mkl_fft/interfaces/__init__.py",
+            "mkl_fft/interfaces/numpy_fft.py",
+            "mkl_fft/interfaces/scipy_fft.py",
+            "mkl_fft/src/mklfft.c.src",
+            "mkl_fft/src/mklfft.h",
+            "mkl_fft/src/multi_iter.h"
+        ],
+        "test_files": [
+            "mkl_fft/tests/test_fft1d.py",
+            "mkl_fft/tests/test_fftnd.py",
+            "mkl_fft/tests/test_interfaces.py"
+        ],
+        "lib_lines": 22,
+        "test_lines": 6,
+        "score": 2.5
+    },
+    {
+        "sha": "956af39676936a1708346b8c07cb465f3938eb8c",
+        "date": "2025-03-07",
+        "subject": "Update Copyright (#129)",
+        "pr": 129,
+        "url": "https://github.com/IntelPython/mkl_fft/pull/129",
+        "lib_files": [
+            "mkl_fft/__init__.py",
+            "mkl_fft/_float_utils.py",
+            "mkl_fft/_numpy_fft.py",
+            "mkl_fft/_pydfti.pyx",
+            "mkl_fft/_scipy_fft.py",
+            "mkl_fft/_scipy_fft_backend.py",
+            "mkl_fft/interfaces/__init__.py",
+            "mkl_fft/interfaces/numpy_fft.py",
+            "mkl_fft/interfaces/scipy_fft.py",
+            "mkl_fft/src/mklfft.c.src",
+            "mkl_fft/src/mklfft.h",
+            "mkl_fft/src/multi_iter.h"
+        ],
+        "test_files": [
+            "mkl_fft/tests/test_fft1d.py",
+            "mkl_fft/tests/test_fftnd.py",
+            "mkl_fft/tests/test_interfaces.py"
+        ],
+        "lib_lines": 34,
+        "test_lines": 6,
+        "score": 2.5
+    },
+    {
+        "sha": "d020950d9ade306f214b4f8dc8e283218dca42b3",
+        "date": "2026-10-14",
+        "subject": "Merge branch 'IntelPython:master' into repoevals",
+        "pr": null,
+        "url":
+            "https://github.com/IntelPython/mkl_fft/commit/d020950d9ade306f214b4f8dc8e283218dca42b3",
+        "lib_files": [
+            "mkl_fft/_fft_utils.py",
+            "mkl_fft/_pydfti.pyx",
+            "mkl_fft/interfaces/_scipy_fft.py",
+            "mkl_fft/src/mklfft.c.src"
+        ],
+        "test_files": [
+            "mkl_fft/tests/test_fft1d.py",
+            "mkl_fft/tests/test_fftnd.py"
+        ],
+        "lib_lines": 120,
+        "test_lines": 216,
+        "score": 2.5
+    },
+    {
+        "sha": "46c8b3fed7528772efbce8045cdafe6c2f65322a",
+        "date": "2025-08-13",
+        "subject": "replace fwd_scale with norm kwarg in mkl_fft (#189)",
+        "pr": 189,
+        "url": "https://github.com/IntelPython/mkl_fft/pull/189",
+        "lib_files": [
+            "mkl_fft/_fft_utils.py",
+            "mkl_fft/_mkl_fft.py",
+            "mkl_fft/interfaces/_numpy_fft.py",
+            "mkl_fft/interfaces/_scipy_fft.py"
+        ],
+        "test_files": [
+            "mkl_fft/tests/test_fftnd.py"
+        ],
+        "lib_lines": 158,
+        "test_lines": 74,
+        "score": 2.5
+    },
+    {
+        "sha": "57c4c5248feb81cf5ebcaaf9bf8585b04dc7bbcf",
+        "date": "2025-04-02",
+        "subject": " raise warning similar to numpy >= 2.0 (#139)",
+        "pr": 139,
+        "url": "https://github.com/IntelPython/mkl_fft/pull/139",
+        "lib_files": [
+            "mkl_fft/_float_utils.py",
+            "mkl_fft/_numpy_fft.py",
+            "mkl_fft/_pydfti.pyx",
+            "mkl_fft/_scipy_fft.py"
+        ],
+        "test_files": [
+            "mkl_fft/tests/test_interfaces.py",
+            "mkl_fft/tests/test_pocketfft.py"
+        ],
+        "lib_lines": 219,
+        "test_lines": 11,
+        "score": 2.5
+    },
+    {
+        "sha": "05232e07613738245d3d1d01668eec5570d97775",
+        "date": "2025-05-15",
+        "subject": "add `README.md` to interfaces (#179)",
+        "pr": 179,
+        "url": "https://github.com/IntelPython/mkl_fft/pull/179",
+        "lib_files": [
+            "mkl_fft/interfaces/README.md",
+            "mkl_fft/interfaces/_scipy_fft.py",
+            "mkl_fft/interfaces/numpy_fft.py",
+            "mkl_fft/interfaces/scipy_fft.py"
+        ],
+        "test_files": [
+            "mkl_fft/tests/test_interfaces.py"
+        ],
+        "lib_lines": 250,
+        "test_lines": 14,
+        "score": 2.5
+    },
+    {
+        "sha": "e18fcc9d88a6e651fe33afaf4fe38a945347f26c",
+        "date": "2026-03-04",
+        "subject": "add manual NumPy patching to `mkl_fft`",
+        "pr": 224,
+        "url": "https://github.com/IntelPython/mkl_fft/pull/224",
+        "lib_files": [
+            "mkl_fft/__init__.py",
+            "mkl_fft/_fft_utils.py",
+            "mkl_fft/_mkl_fft.py",
+            "mkl_fft/_patch_numpy.py",
+            "mkl_fft/interfaces/_float_utils.py",
+            "mkl_fft/interfaces/_numpy_fft.py",
+            "mkl_fft/interfaces/_numpy_helper.py",
+            "mkl_fft/interfaces/_scipy_fft.py",
+            "mkl_fft/interfaces/numpy_fft.py",
+            "mkl_fft/interfaces/scipy_fft.py"
+        ],
+        "test_files": [
+            "mkl_fft/tests/helper.py",
+            "mkl_fft/tests/test_fft1d.py",
+            "mkl_fft/tests/test_fftnd.py",
+            "mkl_fft/tests/test_patch.py"
+        ],
+        "lib_lines": 205,
+        "test_lines": 83,
+        "score": 2.0
+    },
+    {
+        "sha": "b2657e2feb4bdc2047852985c03e9593e637dcc8",
+        "date": "2025-04-23",
+        "subject": "Add Hermitian FFT to scipy interface (#161)",
+        "pr": 161,
+        "url": "https://github.com/IntelPython/mkl_fft/pull/161",
+        "lib_files": [
+            "mkl_fft/_fft_utils.py",
+            "mkl_fft/_numpy_fft.py",
+            "mkl_fft/_scipy_fft.py"
+        ],
+        "test_files": [
+            "mkl_fft/tests/third_party/scipy/test_basic.py",
+            "mkl_fft/tests/third_party/scipy/test_multithreading.py"
+        ],
+        "lib_lines": 462,
+        "test_lines": 71,
+        "score": -0.5
+    },
+    {
+        "sha": "e2950f3748d7203812de7c87ab70f66100d0a0b2",
+        "date": "2025-03-13",
+        "subject": "simplify numpy interface (#134)",
+        "pr": 134,
+        "url": "https://github.com/IntelPython/mkl_fft/pull/134",
+        "lib_files": [
+            "mkl_fft/_numpy_fft.py",
+            "mkl_fft/_pydfti.pyx",
+            "mkl_fft/_scipy_fft_backend.py"
+        ],
+        "test_files": [
+            "mkl_fft/tests/test_fftnd.py"
+        ],
+        "lib_lines": 511,
+        "test_lines": 24,
+        "score": -0.5
+    },
+    {
+        "sha": "65b78b63e761c8aa2ad5b3978979c23f487ec0e1",
+        "date": "2020-09-14",
+        "subject": "Prepare for upcoming changes in Intel(R) MKL",
+        "pr": 52,
+        "url": "https://github.com/IntelPython/mkl_fft/pull/52",
+        "lib_files": [
+            "mkl_fft/_pydfti.pyx",
+            "mkl_fft/setup.py",
+            "mkl_fft/src/mklfft.c.src"
+        ],
+        "test_files": [
+            "mkl_fft/tests/test_fft1d.py"
+        ],
+        "lib_lines": 589,
+        "test_lines": 6,
+        "score": -0.5
+    },
+    {
+        "sha": "6d429c7cc27d76bfdcf92baed4590fb3309f1a1f",
+        "date": "2025-04-25",
+        "subject": "add support for `out` keyword (#157)",
+        "pr": 157,
+        "url": "https://github.com/IntelPython/mkl_fft/pull/157",
+        "lib_files": [
+            "mkl_fft/_numpy_fft.py",
+            "mkl_fft/_pydfti.pyx",
+            "mkl_fft/_scipy_fft.py"
+        ],
+        "test_files": [
+            "mkl_fft/tests/__init__.py",
+            "mkl_fft/tests/helper.py",
+            "mkl_fft/tests/test_fft1d.py",
+            "mkl_fft/tests/test_fftnd.py",
+            "mkl_fft/tests/third_party/numpy/test_fft.py"
+        ],
+        "lib_lines": 1502,
+        "test_lines": 135,
+        "score": -1.0
+    },
+    {
+        "sha": "c4696d2b5f63d995ac28d1b22196a456e1531c51",
+        "date": "2025-09-22",
+        "subject": "Revisit usage of `overwrite_x` parameter",
+        "pr": 185,
+        "url": "https://github.com/IntelPython/mkl_fft/pull/185",
+        "lib_files": [
+            "mkl_fft/__init__.py",
+            "mkl_fft/_fft_utils.py",
+            "mkl_fft/_mkl_fft.py",
+            "mkl_fft/_pydfti.pyx",
+            "mkl_fft/interfaces/_scipy_fft.py",
+            "mkl_fft/interfaces/_scipy_fftpack.py"
+        ],
+        "test_files": [
+            "mkl_fft/tests/test_fft1d.py",
+            "mkl_fft/tests/test_fftnd.py"
+        ],
+        "lib_lines": 674,
+        "test_lines": 92,
+        "score": -2.5
+    },
+    {
+        "sha": "bee4cf68c36c68bf4a6658b082a6428542e43ab4",
+        "date": "2025-04-01",
+        "subject": "add pre-commit format (#142)",
+        "pr": 142,
+        "url": "https://github.com/IntelPython/mkl_fft/pull/142",
+        "lib_files": [
+            "mkl_fft/__init__.py",
+            "mkl_fft/_float_utils.py",
+            "mkl_fft/_numpy_fft.py",
+            "mkl_fft/_pydfti.pyx",
+            "mkl_fft/_scipy_fft.py",
+            "mkl_fft/_scipy_fftpack.py",
+            "mkl_fft/_version.py",
+            "mkl_fft/interfaces/__init__.py",
+            "mkl_fft/src/mklfft.c.src",
+            "mkl_fft/src/mklfft.h",
+            "mkl_fft/src/multi_iter.h"
+        ],
+        "test_files": [
+            "mkl_fft/tests/test_fft1d.py",
+            "mkl_fft/tests/test_fftnd.py",
+            "mkl_fft/tests/test_interfaces.py",
+            "mkl_fft/tests/test_pocketfft.py"
+        ],
+        "lib_lines": 700,
+        "test_lines": 866,
+        "score": -2.5
+    },
+    {
+        "sha": "cc946a1614cff2442a89a52c0fc79a7298014ada",
+        "date": "2021-02-23",
+        "subject": "Updates for numpy 1 20",
+        "pr": 55,
+        "url": "https://github.com/IntelPython/mkl_fft/pull/55",
+        "lib_files": [
+            "mkl_fft/_numpy_fft.py",
+            "mkl_fft/_pydfti.pyx",
+            "mkl_fft/src/mklfft.c.src",
+            "mkl_fft/src/mklfft.h"
+        ],
+        "test_files": [
+            "mkl_fft/tests/test_fftnd.py"
+        ],
+        "lib_lines": 751,
+        "test_lines": 61,
+        "score": -2.5
+    },
+    {
+        "sha": "69defded06686124f8dacbe8ee82468924226ee6",
+        "date": "2025-03-14",
+        "subject": "update functions name (#137)",
+        "pr": 137,
+        "url": "https://github.com/IntelPython/mkl_fft/pull/137",
+        "lib_files": [
+            "mkl_fft/__init__.py",
+            "mkl_fft/_numpy_fft.py",
+            "mkl_fft/_pydfti.pyx",
+            "mkl_fft/_scipy_fft.py",
+            "mkl_fft/_scipy_fft_backend.py",
+            "mkl_fft/_scipy_fftpack.py",
+            "mkl_fft/interfaces/scipy_fft.py"
+        ],
+        "test_files": [
+            "mkl_fft/tests/test_fft1d.py",
+            "mkl_fft/tests/test_fftnd.py"
+        ],
+        "lib_lines": 953,
+        "test_lines": 30,
+        "score": -2.5
+    },
+    {
+        "sha": "2eb3cfc66396abedae6eef2a7b7632138a610c08",
+        "date": "2025-05-09",
+        "subject": "revisit the structure of the package (#168)",
+        "pr": 168,
+        "url": "https://github.com/IntelPython/mkl_fft/pull/168",
+        "lib_files": [
+            "mkl_fft/__init__.py",
+            "mkl_fft/_fft_utils.py",
+            "mkl_fft/_float_utils.py",
+            "mkl_fft/_mkl_fft.py",
+            "mkl_fft/_numpy_fft.py",
+            "mkl_fft/_pydfti.pyx",
+            "mkl_fft/_scipy_fft.py",
+            "mkl_fft/_scipy_fftpack.py",
+            "mkl_fft/interfaces/_float_utils.py",
+            "mkl_fft/interfaces/_numpy_fft.py",
+            "mkl_fft/interfaces/_scipy_fft.py",
+            "mkl_fft/interfaces/_scipy_fftpack.py",
+            "mkl_fft/interfaces/numpy_fft.py",
+            "mkl_fft/interfaces/scipy_fft.py"
+        ],
+        "test_files": [
+            "mkl_fft/tests/test_fftnd.py"
+        ],
+        "lib_lines": 4273,
+        "test_lines": 5,
+        "score": -2.5
+    },
+    {
+        "sha": "ad69a05272b2317982d860c50aeddb06462d4ba2",
+        "date": "2026-05-28",
+        "subject": "task: module CLI patching methods",
+        "pr": 319,
+        "url": "https://github.com/IntelPython/mkl_fft/pull/319",
+        "lib_files": [
+            "mkl_fft/__main__.py",
+            "mkl_fft/_patch_startup.py",
+            "mkl_fft/patch.py",
+            "mkl_fft/with_patch.py"
+        ],
+        "test_files": [
+            "mkl_fft/tests/test_cli.py"
+        ],
+        "lib_lines": 354,
+        "test_lines": 160,
+        "score": -3.0
+    },
+    {
+        "sha": "a03458e4cfd250705210429533cdff7600ed7611",
+        "date": "2023-03-08",
+        "subject": "Add interfaces",
+        "pr": 76,
+        "url": "https://github.com/IntelPython/mkl_fft/pull/76",
+        "lib_files": [
+            "mkl_fft/__init__.py",
+            "mkl_fft/_float_utils.py",
+            "mkl_fft/_numpy_fft.py",
+            "mkl_fft/_pydfti.pyx",
+            "mkl_fft/_scipy_fft.py",
+            "mkl_fft/_scipy_fft_backend.py",
+            "mkl_fft/interfaces/__init__.py"
+        ],
+        "test_files": [
+            "mkl_fft/tests/test_fft1d.py",
+            "mkl_fft/tests/test_fftnd.py",
+            "mkl_fft/tests/test_interfaces.py"
+        ],
+        "lib_lines": 428,
+        "test_lines": 143,
+        "score": -3.0
+    },
+    {
+        "sha": "b543ee9b8e802e0e2a8d1bf6704d874f8cada7ea",
+        "date": "2025-04-11",
+        "subject": "update `_scipy_fft.py` (#145)",
+        "pr": 145,
+        "url": "https://github.com/IntelPython/mkl_fft/pull/145",
+        "lib_files": [
+            "mkl_fft/_fft_utils.py",
+            "mkl_fft/_float_utils.py",
+            "mkl_fft/_numpy_fft.py",
+            "mkl_fft/_pydfti.pyx",
+            "mkl_fft/_scipy_fft.py",
+            "mkl_fft/_scipy_fftpack.py"
+        ],
+        "test_files": [
+            "mkl_fft/tests/test_interfaces.py",
+            "mkl_fft/tests/test_pocketfft.py",
+            "mkl_fft/tests/third_party/numpy/test_fft.py",
+            "mkl_fft/tests/third_party/scipy/test_basic.py",
+            "mkl_fft/tests/third_party/scipy/test_multithreading.py"
+        ],
+        "lib_lines": 546,
+        "test_lines": 2321,
+        "score": -3.0
+    },
+    {
+        "sha": "357a0b7b73e59d8f99bde8d07eb7aee948c1af13",
+        "date": "2020-01-13",
+        "subject": "Add scipy1.4 backend",
+        "pr": 45,
+        "url": "https://github.com/IntelPython/mkl_fft/pull/45",
+        "lib_files": [
+            "mkl_fft/__init__.py",
+            "mkl_fft/_float_utils.py",
+            "mkl_fft/_numpy_fft.py",
+            "mkl_fft/_pydfti.pyx",
+            "mkl_fft/_scipy_fft.py",
+            "mkl_fft/_scipy_fft_backend.py",
+            "mkl_fft/setup.py",
+            "mkl_fft/src/mklfft.c.src",
+            "mkl_fft/src/mklfft.h",
+            "mkl_fft/src/multi_iter.h"
+        ],
+        "test_files": [
+            "mkl_fft/tests/test_fft1d.py",
+            "mkl_fft/tests/test_fftnd.py"
+        ],
+        "lib_lines": 326,
+        "test_lines": 4,
+        "score": -3.5
+    }
+]

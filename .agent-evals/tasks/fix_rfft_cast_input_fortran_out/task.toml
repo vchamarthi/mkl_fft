@@ -1,0 +1,30 @@
+version = "1.0"
+
+[metadata]
+family = "fix"
+status = "draft"
+base = "5ace5e78fb5835a17aebf0b63814dacce6f16df9"
+created = "2026-10-14"
+source = "https://github.com/IntelPython/mkl_fft/pull/389"
+difficulty = "medium"
+tags = ["out", "rfft", "dtype-cast", "cython"]
+
+[agent]
+timeout_sec = 3600
+
+[verifier]
+timeout_sec = 1800
+
+[grader]
+type = "hidden_tests"
+targets = [
+    "mkl_fft/tests/test_fft1d.py::test_rfft_out_fortran",
+    "mkl_fft/tests/test_fftnd.py::test_rfftn_out_fortran",
+]
+regression_targets = [
+    "mkl_fft/tests/test_fft1d.py",
+    "mkl_fft/tests/test_fftnd.py",
+    "mkl_fft/tests/test_interfaces.py",
+]
+root_cause_files = ["mkl_fft/_pydfti.pyx"]
+gate = ["strict_pass"]

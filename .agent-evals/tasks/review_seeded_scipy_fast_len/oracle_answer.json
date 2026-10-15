@@ -1,0 +1,16 @@
+[
+  {"file": "mkl_fft/interfaces/_scipy_fft.py", "line": 776, "severity": "blocker", "rule": "off-by-one",
+   "message": "The search starts at target + 1, so a target that is already a fast length (e.g. 8) is skipped and 9 is returned; it must start at target."},
+  {"file": "mkl_fft/interfaces/_scipy_fft.py", "line": 774, "severity": "major", "rule": "input-validation",
+   "message": "target == 0 is accepted (and returns 1) while scipy.fft.next_fast_len raises ValueError for non-positive targets; the check should be target < 1."},
+  {"file": "mkl_fft/interfaces/_scipy_fft.py", "line": 756, "severity": "major", "rule": "numerical-robustness",
+   "message": "n / p is float division, so for lengths above 2**53 (e.g. 3**40) the factorization loses precision and fast lengths are misclassified; use integer division n //= p."},
+  {"file": "mkl_fft/interfaces/_scipy_fft.py", "line": 773, "severity": "minor", "rule": "debug-output",
+   "message": "Remove the debug print to stdout."},
+  {"file": "mkl_fft/interfaces/scipy_fft.py", "line": 47, "severity": "major", "rule": "api-export",
+   "message": "prev_fast_len is added to _scipy_fft.__all__ and the README but not imported or listed in __all__ of the public scipy_fft module, so it is unavailable and not dispatched by __ua_function__."},
+  {"file": "mkl_fft/tests/test_interfaces.py", "line": 198, "severity": "major", "rule": "weak-test",
+   "message": "The test only asserts n >= target, which passes with the off-by-one bug; assert the exact smallest fast length (and that fast targets map to themselves), and add tests for prev_fast_len."},
+  {"file": "CHANGELOG.md", "line": 1, "severity": "minor", "rule": "changelog",
+   "message": "A user-visible API addition needs a CHANGELOG.md entry under [dev] as CONTRIBUTING.md requires."}
+]

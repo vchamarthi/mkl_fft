@@ -1,0 +1,12 @@
+diff --git a/mkl_fft/_fft_utils.py b/mkl_fft/_fft_utils.py
+--- a/mkl_fft/_fft_utils.py
++++ b/mkl_fft/_fft_utils.py
+@@ -89,7 +89,7 @@
+ 
+ 
+ def _cook_nd_args(a, s=None, axes=None, invreal=False):
+-    if s is None:
++    if not (s is None):
+         shapeless = True
+         if axes is None:
+             s = list(a.shape)

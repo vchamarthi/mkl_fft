@@ -1,0 +1,21 @@
+version = "1.0"
+
+[metadata]
+family = "test"
+status = "draft"
+base = "4e84e7e1dbfa958a7b450b8136b046165a3f4924"
+created = "2026-10-14"
+source = "mutants of mkl_fft/interfaces/_scipy_fft.py"
+tags = ["scipy-interface", "shape-axes", "python"]
+difficulty = "medium"
+
+[agent]
+timeout_sec = 2400
+
+[verifier]
+timeout_sec = 1800
+
+[grader]
+type = "mutation"
+min_kill = 0.8
+oracle_min_kill = 1.0

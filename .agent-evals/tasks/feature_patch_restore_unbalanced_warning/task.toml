@@ -1,0 +1,26 @@
+version = "1.0"
+
+[metadata]
+family = "feature"
+status = "draft"
+base = "27583c9155356b4126385085b6dd28df95b73b44"
+created = "2026-03-19"
+source = "https://github.com/IntelPython/mkl_fft/pull/295"
+difficulty = "easy"
+tags = ["patching", "warnings", "python"]
+
+[agent]
+timeout_sec = 3600
+
+[verifier]
+timeout_sec = 1800
+
+[grader]
+type = "hidden_tests"
+targets = ["mkl_fft/tests/test_patch.py::test_patch_warning"]
+regression_targets = [
+    "mkl_fft/tests/test_patch.py",
+    "mkl_fft/tests/test_interfaces.py",
+]
+root_cause_files = ["mkl_fft/_patch_numpy.py"]
+gate = ["strict_pass"]

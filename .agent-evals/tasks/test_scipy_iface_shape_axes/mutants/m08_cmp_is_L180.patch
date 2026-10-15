@@ -1,0 +1,12 @@
+diff --git a/mkl_fft/interfaces/_scipy_fft.py b/mkl_fft/interfaces/_scipy_fft.py
+--- a/mkl_fft/interfaces/_scipy_fft.py
++++ b/mkl_fft/interfaces/_scipy_fft.py
+@@ -177,7 +177,7 @@
+ # https://github.com/scipy/scipy/blob/main/scipy/fft/_pocketfft/helper.py
+ def _init_nd_shape_and_axes(x, shape, axes, invreal=False):
+     noshape = shape is None
+-    noaxes = axes is None
++    noaxes = axes is not None
+ 
+     if not noaxes:
+         axes = _iterable_of_int(axes, "axes")

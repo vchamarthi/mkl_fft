@@ -1,0 +1,190 @@
+{
+    "tasks": [
+        {
+            "task": "feature_patch_restore_unbalanced_warning",
+            "grader": "hidden_tests",
+            "null": "fail",
+            "oracle": [
+                "pass",
+                "pass",
+                "pass"
+            ],
+            "problems": [],
+            "status": "ok"
+        },
+        {
+            "task": "fix_c2c_out_cast_or_padded_input",
+            "grader": "hidden_tests",
+            "null": "fail",
+            "oracle": [
+                "pass",
+                "pass",
+                "pass"
+            ],
+            "problems": [],
+            "status": "ok"
+        },
+        {
+            "task": "fix_ifft_real_input_strided_out",
+            "grader": "hidden_tests",
+            "null": "fail",
+            "oracle": [
+                "pass",
+                "pass",
+                "pass"
+            ],
+            "problems": [],
+            "status": "ok"
+        },
+        {
+            "task": "fix_nd_empty_axes",
+            "grader": "hidden_tests",
+            "null": "fail",
+            "oracle": [
+                "pass",
+                "pass",
+                "pass"
+            ],
+            "problems": [],
+            "status": "ok"
+        },
+        {
+            "task": "fix_nd_norm_subset_axes",
+            "grader": "hidden_tests",
+            "null": "fail",
+            "oracle": [
+                "pass",
+                "pass",
+                "pass"
+            ],
+            "problems": [],
+            "status": "ok"
+        },
+        {
+            "task": "fix_rfft_cast_input_fortran_out",
+            "grader": "hidden_tests",
+            "null": "fail",
+            "oracle": [
+                "pass",
+                "pass",
+                "pass"
+            ],
+            "problems": [],
+            "status": "ok"
+        },
+        {
+            "task": "numeric_fftn_real_input_hermitian",
+            "grader": "numeric",
+            "null": "fail",
+            "oracle": [
+                "pass",
+                "pass",
+                "pass"
+            ],
+            "problems": [],
+            "status": "ok"
+        },
+        {
+            "task": "numeric_numpy_iface_longdouble",
+            "grader": "numeric",
+            "null": "fail",
+            "oracle": [
+                "pass",
+                "pass",
+                "pass"
+            ],
+            "problems": [],
+            "status": "ok"
+        },
+        {
+            "task": "review_clean_norm_scale_docs",
+            "grader": "review_seeded",
+            "null": "fail",
+            "oracle": [
+                "pass",
+                "pass",
+                "pass"
+            ],
+            "spam": {
+                "status": "fail",
+                "precision": 0.0
+            },
+            "problems": [],
+            "status": "ok"
+        },
+        {
+            "task": "review_seeded_scipy_fast_len",
+            "grader": "review_seeded",
+            "null": "fail",
+            "oracle": [
+                "pass",
+                "pass",
+                "pass"
+            ],
+            "spam": {
+                "status": "fail",
+                "precision": 0.0
+            },
+            "problems": [],
+            "status": "ok"
+        },
+        {
+            "task": "test_fft_utils_norm_scale",
+            "grader": "mutation",
+            "null": "fail",
+            "oracle_kill_rate": 1.0,
+            "oracle": [
+                "pass",
+                "pass",
+                "pass"
+            ],
+            "problems": [],
+            "status": "ok"
+        },
+        {
+            "task": "test_scipy_iface_shape_axes",
+            "grader": "mutation",
+            "null": "fail",
+            "oracle_kill_rate": 1.0,
+            "oracle": [
+                "pass",
+                "pass",
+                "pass"
+            ],
+            "problems": [],
+            "status": "ok"
+        }
+    ],
+    "packages": {
+        "cmake": "4.4.4",
+        "cython": "3.3.0",
+        "iniconfig": "2.3.1",
+        "intel-cmplr-lib-ur": "2026.1.2",
+        "intel-openmp": "2026.1.2",
+        "meson": "1.12.1",
+        "meson-python": "0.22.1",
+        "mkl": "2026.1.0",
+        "mkl-devel": "2026.1.0",
+        "mkl-include": "2026.1.0",
+        "mkl-service": "2.8.0",
+        "mkl_fft": "2.4.0.dev0",
+        "ninja": "1.13.2",
+        "numpy": "2.5.4",
+        "onemkl-license": "2026.1.0",
+        "packaging": "26.3",
+        "pip": "26.2.1",
+        "pluggy": "1.6.0",
+        "pygments": "2.21.0",
+        "pyproject-metadata": "0.12.1",
+        "pytest": "9.1.1",
+        "repoevals": "0.2.0",
+        "scipy": "1.18.1",
+        "setuptools": "84.0.0",
+        "tbb": "2023.1.0",
+        "tbb-devel": "2023.1.0",
+        "tcmlib": "1.5.0",
+        "umf": "1.1.0",
+        "wheel": "0.48.0"
+    },
+    "repoevals_version": "0.2.0"
+}

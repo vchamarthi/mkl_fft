@@ -1,0 +1,12 @@
+diff --git a/mkl_fft/_fft_utils.py b/mkl_fft/_fft_utils.py
+--- a/mkl_fft/_fft_utils.py
++++ b/mkl_fft/_fft_utils.py
+@@ -104,7 +104,7 @@
+         shapeless = False
+     s = list(s)
+     if axes is None:
+-        axes = list(range(-len(s), 0))
++        axes = list(range(-len(s), 1))
+     if len(s) != len(axes):
+         raise ValueError("Shape and axes have different lengths.")
+     if invreal and shapeless:

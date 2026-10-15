@@ -1,0 +1,31 @@
+version = "1.0"
+
+[metadata]
+family = "fix"
+status = "draft"
+base = "5ace5e78fb5835a17aebf0b63814dacce6f16df9"
+created = "2026-10-14"
+source = "https://github.com/IntelPython/mkl_fft/pull/389"
+difficulty = "hard"
+tags = ["out", "strides", "c-backend"]
+
+[agent]
+timeout_sec = 3600
+
+[verifier]
+timeout_sec = 1800
+
+[grader]
+type = "hidden_tests"
+targets = [
+    "mkl_fft/tests/test_fft1d.py::test_fft_real_input_out_strided_1d",
+    "mkl_fft/tests/test_fft1d.py::test_fft_real_input_out_strided",
+    "mkl_fft/tests/test_fftnd.py::test_out_strided_real_input",
+]
+regression_targets = [
+    "mkl_fft/tests/test_fft1d.py",
+    "mkl_fft/tests/test_fftnd.py",
+    "mkl_fft/tests/test_interfaces.py",
+]
+root_cause_files = ["mkl_fft/src/mklfft.c.src"]
+gate = ["strict_pass"]

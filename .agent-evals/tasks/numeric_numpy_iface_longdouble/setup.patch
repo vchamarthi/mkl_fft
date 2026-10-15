@@ -1,0 +1,17 @@
+diff --git a/mkl_fft/interfaces/_float_utils.py b/mkl_fft/interfaces/_float_utils.py
+index af0f1da..06ed5b7 100644
+--- a/mkl_fft/interfaces/_float_utils.py
++++ b/mkl_fft/interfaces/_float_utils.py
+@@ -58,9 +58,10 @@ def _downcast_float128_array(x):
+     if hasattr(x, "dtype"):
+         xdt = x.dtype
+         if xdt == np.longdouble and not xdt == np.float64:
+-            return np.asarray(x, dtype=np.float64)
++            # no long double routines, so convert to a supported precision
++            return np.asarray(x, dtype=np.float32)
+         elif xdt == np.clongdouble and not xdt == np.complex128:
+-            return np.asarray(x, dtype=np.complex128)
++            return np.asarray(x, dtype=np.complex64)
+     if not isinstance(x, np.ndarray):
+         _x = np.asarray(x)
+         xdt = _x.dtype

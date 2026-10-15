@@ -1,0 +1,12 @@
+diff --git a/mkl_fft/interfaces/_scipy_fft.py b/mkl_fft/interfaces/_scipy_fft.py
+--- a/mkl_fft/interfaces/_scipy_fft.py
++++ b/mkl_fft/interfaces/_scipy_fft.py
+@@ -179,7 +179,7 @@
+     noshape = shape is None
+     noaxes = axes is None
+ 
+-    if not noaxes:
++    if not (not noaxes):
+         axes = _iterable_of_int(axes, "axes")
+         axes = [a + x.ndim if a < 0 else a for a in axes]
+ 

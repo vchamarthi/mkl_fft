@@ -1,0 +1,12 @@
+diff --git a/mkl_fft/_fft_utils.py b/mkl_fft/_fft_utils.py
+--- a/mkl_fft/_fft_utils.py
++++ b/mkl_fft/_fft_utils.py
+@@ -68,7 +68,7 @@
+ 
+ def _compute_fwd_scale(norm, n, shape):
+     _check_norm(norm)
+-    if norm in (None, "backward"):
++    if not (norm in (None, "backward")):
+         return 1.0
+ 
+     ss = n if n is not None else shape

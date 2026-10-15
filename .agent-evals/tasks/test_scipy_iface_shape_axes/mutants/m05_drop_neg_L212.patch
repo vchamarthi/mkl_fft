@@ -1,0 +1,12 @@
+diff --git a/mkl_fft/interfaces/_scipy_fft.py b/mkl_fft/interfaces/_scipy_fft.py
+--- a/mkl_fft/interfaces/_scipy_fft.py
++++ b/mkl_fft/interfaces/_scipy_fft.py
+@@ -209,7 +209,7 @@
+         shape = [x.shape[a] for a in axes]
+ 
+     if noshape and invreal:
+-        shape[-1] = (x.shape[axes[-1]] - 1) * 2
++        shape[1] = (x.shape[axes[-1]] - 1) * 2
+ 
+     if any(s < 1 for s in shape):
+         raise ValueError(f"invalid number of data points ({shape}) specified")

@@ -1,0 +1,57 @@
+diff --git a/mkl_fft/_fft_utils.py b/mkl_fft/_fft_utils.py
+index 8e2fb50..1a0dcf1 100644
+--- a/mkl_fft/_fft_utils.py
++++ b/mkl_fft/_fft_utils.py
+@@ -67,6 +67,31 @@ def _check_shapes_for_direct(xs, shape, axes, check_complementary=False):
+ 
+ 
+ def _compute_fwd_scale(norm, n, shape):
++    """
++    Return the scale factor applied to the forward transform for `norm`.
++
++    Parameters
++    ----------
++    norm : {None, "backward", "ortho", "forward"}
++        Normalization mode, as in `numpy.fft`.
++    n : int, sequence of ints, or None
++        Transform length(s). If ``None``, `shape` is used instead.
++    shape : int or sequence of ints
++        Fallback length(s), typically the shape of the transformed axes.
++
++    Returns
++    -------
++    float
++        ``1.0`` for ``None`` and ``"backward"``, ``1 / N`` for ``"forward"``
++        and ``1 / sqrt(N)`` for ``"ortho"``, where ``N`` is the product of the
++        lengths. ``N == 0`` gives ``1``.
++
++    Raises
++    ------
++    ValueError
++        If `norm` is not one of the supported values.
++
++    """
+     _check_norm(norm)
+     if norm in (None, "backward"):
+         return 1.0
+diff --git a/mkl_fft/tests/test_fft1d.py b/mkl_fft/tests/test_fft1d.py
+index 4336aef..3eb7ad6 100644
+--- a/mkl_fft/tests/test_fft1d.py
++++ b/mkl_fft/tests/test_fft1d.py
+@@ -548,3 +548,16 @@ def test_rfft_out_fortran(dt, axis):
+ 
+     assert result is out
+     assert_allclose(result, expected, atol=1e-10)
++
++
++@pytest.mark.parametrize("norm", [None, "backward", "ortho", "forward"])
++@pytest.mark.parametrize("n", [None, 10, 40])
++@pytest.mark.parametrize("func", ["fft", "ifft", "rfft", "irfft"])
++def test_norm_with_n(func, n, norm):
++    # the scale uses the transform length n, not the input length
++    x = rnd.random(32)
++    if func == "irfft":
++        x = np.fft.rfft(x)
++    result = getattr(mkl_fft, func)(x, n=n, norm=norm)
++    expected = getattr(np.fft, func)(x, n=n, norm=norm)
++    assert_allclose(result, expected, rtol=1e-12, atol=1e-12)

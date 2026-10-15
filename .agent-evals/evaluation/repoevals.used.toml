@@ -1,0 +1,31 @@
+[environment]
+setup = "P=$(python -c 'import sys; print(sys.prefix)'); L=${TMPDIR:-/tmp}/mkl_fft-mklrt; mkdir -p \"$L\"; set -- \"$P\"/lib/libmkl_rt.so*; ln -sf \"$1\" \"$L/libmkl_rt.so\"; MKLROOT=${MKLROOT:-$P} LIBRARY_PATH=\"$L${LIBRARY_PATH:+:$LIBRARY_PATH}\" pip install -q --no-build-isolation --no-deps -e ."
+setup_timeout_sec = 1800
+
+[guidance]
+globs = ["**/AGENTS.md", "**/CLAUDE.md", ".claude/**", ".github/copilot-instructions.md", ".github/instructions/*.md"]
+
+[policy]
+library_globs = ["mkl_fft/**"]
+protected_globs = ["mkl_fft/tests/third_party/**"]
+test_globs = ["mkl_fft/tests/**"]
+
+# repoevals configuration for mkl_fft — https://github.com/vchamarthi/repoevals
+#
+# Each workspace is built from source (meson-python, MKL from PyPI `mkl-devel`) once before the agent starts;
+# bases before the meson migration (#303) use setuptools, which needs MKLROOT and an unversioned libmkl_rt.so
+# (PyPI mkl-devel ships only libmkl_rt.so.3), so setup/build provide both;
+# graders rebuild only when compiled sources or build files change.
+[repo]
+id = "mkl_fft"
+tasks = ".agent-evals/tasks"
+upstream = "https://github.com/IntelPython/mkl_fft.git"
+url = "https://github.com/IntelPython/mkl_fft"
+
+[test]
+adapter = "pytest"
+build = "P=$(python -c 'import sys; print(sys.prefix)'); L=${TMPDIR:-/tmp}/mkl_fft-mklrt; mkdir -p \"$L\"; set -- \"$P\"/lib/libmkl_rt.so*; ln -sf \"$1\" \"$L/libmkl_rt.so\"; MKLROOT=${MKLROOT:-$P} LIBRARY_PATH=\"$L${LIBRARY_PATH:+:$LIBRARY_PATH}\" pip install -q --no-build-isolation --no-deps -e ."
+command = "python -m pytest -q -p no:randomly -p no:cacheprovider {targets}"
+env = { MKL_NUM_THREADS = "2", OMP_NUM_THREADS = "2" }
+rebuild_globs = ["**/meson.build", "pyproject.toml", "**/*.src", "**/*.pyx", "**/*.pxd", "**/*.c", "**/*.h"]
+timeout_sec = 1800
