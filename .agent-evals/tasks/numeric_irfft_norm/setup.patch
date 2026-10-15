@@ -1,0 +1,13 @@
+diff --git a/mkl_fft/_mkl_fft.py b/mkl_fft/_mkl_fft.py
+index 44b76b6..f7265ea 100644
+--- a/mkl_fft/_mkl_fft.py
++++ b/mkl_fft/_mkl_fft.py
+@@ -84,7 +84,7 @@ def rfft(x, n=None, axis=-1, norm=None, out=None):
+ 
+ 
+ def irfft(x, n=None, axis=-1, norm=None, out=None):
+-    fsc = _compute_fwd_scale(norm, n, 2 * (x.shape[axis] - 1))
++    fsc = _compute_fwd_scale(norm, n, x.shape[axis])
+     return _c2r_fft1d_impl(x, n=n, axis=axis, out=out, fsc=fsc)
+ 
+ 
