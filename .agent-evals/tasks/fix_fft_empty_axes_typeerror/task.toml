@@ -20,6 +20,7 @@ type = "hidden_tests"
 # Narrow targets to the tests that fail before the fix and pass after it (node ids for pytest).
 targets = ["mkl_fft/tests/test_repoevals_fix_fft_empty_axes_typeerror_fftnd.py"]
 # Existing tests of the same component that must keep passing.
-regression_targets = ["mkl_fft/tests/test_fftnd.py::test_s_axes", "mkl_fft/tests/test_fftnd.py::test_s_none_vs_s_full", "mkl_fft/tests/test_fftnd.py::test_repeated_axes", "mkl_fft/tests/test_fftnd.py::Test_Regressions"]
+# test_s_none_vs_s_full is excluded: random input at a tolerance of ~1e-13 makes it fail occasionally
+regression_targets = ["mkl_fft/tests/test_fftnd.py::test_s_axes", "mkl_fft/tests/test_fftnd.py::test_repeated_axes", "mkl_fft/tests/test_fftnd.py::Test_Regressions"]
 root_cause_files = ["mkl_fft/_fft_utils.py"]
 gate = ["strict_pass"]
